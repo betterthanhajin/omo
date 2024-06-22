@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { OmoHeader } from "@/components/omo-header";
 import OmoSectionOne from "@/components/omo-section-one";
-import Image from "next/image";
 import OmoSection from "@/components/omo-section";
 import OmoSectionTwo from "@/components/omo-section-two";
 import OmoSectionThree from "@/components/omo-section-three";
