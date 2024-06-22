@@ -1,7 +1,13 @@
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import omoLogo from "@/public/omo-logo.svg";
 
 export function OmoHeader() {
+  const [currentDate, setCurrentDate] = useState("");
+
+  useEffect(() => {
+    setCurrentDate(new Date().toLocaleDateString());
+  }, []);
   return (
     <header className="sticky top-0 left-0 right-0 flex justify-between items-center px-6 py-2 bg-white w-full h-[130px] text-[#645555]">
       <div className="flex items-center gap-2">
@@ -18,9 +24,14 @@ export function OmoHeader() {
       </div>
       <div>
         <span className="font-semibold block text-right">omoshiroi</span>
-        <div className="bg-[#FEBCBC] w-[120px] h-[25px] rounded-lg"></div>
-        <span className="text-xs block text-right">switching concept</span>
-        <div className="text-right text-sm">2024.08.01</div>
+        <div className="flex justify-end">
+          <label className="switch">
+            <input type="checkbox" />
+            <span className="slider round"></span>
+          </label>
+        </div>
+        <span className="text-xs block text-right">switching concept!!</span>
+        <div className="text-right text-sm">{currentDate}</div>
       </div>
     </header>
   );
