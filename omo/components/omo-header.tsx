@@ -9,9 +9,9 @@ export function OmoHeader() {
     setCurrentDate(new Date().toLocaleDateString());
   }, []);
   return (
-    <header className="sticky top-0 left-0 right-0 flex justify-between items-center px-6 py-2 bg-white w-full h-[130px] text-[#645555]">
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-6 py-2 bg-white w-full h-[100px] text-[#645555]">
       <div className="flex items-center gap-2">
-        <Image src={omoLogo} alt="omo logo" width="100" height="100"></Image>
+        <Image src={omoLogo} alt="omo logo" width="70" height="70"></Image>
         <span className="font-semibold">
           LEE
           <br />
