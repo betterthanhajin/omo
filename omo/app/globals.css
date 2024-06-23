@@ -32,9 +32,10 @@ html {
   }
 }
 
+/**
+
 .moving-circle {
   animation-delay: 3s;
-  animation-duration: 3s;
   animation-iteration-count: 1;
   animation-name: movingcircle;
   animation-timing-function: ease-in-out;
@@ -42,21 +43,25 @@ html {
 
 @keyframes movingcircle {
   to {
-    transform: translateX(0px);
-    display: none;
+    transform: translateY(0px);
   }
 
   from {
-    transform: translateX(500px);
-    display: block;
+    transform: translateY(100px);
   }
 }
+**/
 
 .title-box {
-  animation-duration: 3s;
-  animation-iteration-count: 1;
-  animation-name: movingbox;
+  transition: width 1s ease-out;
 }
+
+.title-box .expanded {
+  width: 100%;
+}
+
+/**
+ * moving box
 
 @keyframes movingbox {
   to {
@@ -71,7 +76,7 @@ html {
     transform: scale(1);
   }
 }
-
+ */
 /**
   * switch button
   */
