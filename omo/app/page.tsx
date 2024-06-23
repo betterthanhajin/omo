@@ -12,6 +12,7 @@ import { OmoFooter } from "@/components/omo-footer";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [overFlow, setOverFlow] = useState(false);
   const mainRef = useRef<HTMLHtmlElement>(null);
   const totalSlides = 5;
 
@@ -22,9 +23,16 @@ export default function Home() {
       if (mainRef.current) {
         mainRef.current.style.position = "static";
       }
+      setOverFlow(true);
     } else {
       document.body.style.overflowY = "hidden";
       document.documentElement.style.overflowY = "hidden";
+      console.log("currentSlide***", currentSlide);
+      if (mainRef.current) {
+        mainRef.current.style.position = "fixed";
+        mainRef.current.style.top = "100px";
+      }
+      setOverFlow(false);
     }
   }, [currentSlide]);
 
@@ -92,8 +100,8 @@ export default function Home() {
             <OmoSectionFive />
           </OmoSection>
         </main>
-        <OmoBoard />
-        <OmoFooter />
+        <OmoBoard overFlow={overFlow} />
+        <OmoFooter overFlow={overFlow} />
       </div>
     </>
   );
