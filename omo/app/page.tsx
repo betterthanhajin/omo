@@ -75,6 +75,7 @@ export default function Home() {
       window.removeEventListener("touchend", handleTouchEnd);
     };
   }, []);
+
   return (
     <>
       <div>

@@ -12,15 +12,15 @@ export default function OmoSectionOne() {
     // // Start circle animation after 3 seconds (1s for square animation + 2s delay)
     const timer = setTimeout(() => {
       setIsCircleMoving(true);
-    }, 4000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
   return (
     <>
-      <section className="bg-[#FEA1A1] w-full h-full p-4">
+      <section className="bg-[#FEA1A1] w-full h-full">
         <div>
-          <div className="flex justify-between">
+          <div>
             <div
               className={
                 isSquareExpanded
@@ -37,14 +37,20 @@ export default function OmoSectionOne() {
                 blog
               </h2>
             </div>
-            <div className="w-28 h-28 rounded-full bg-gray-200"></div>
+            <div
+              className={
+                isSquareExpanded
+                  ? "hidden"
+                  : "block w-28 h-28 rounded-full bg-gray-200"
+              }
+            ></div>
           </div>
 
           <div
             className={
               isCircleMoving
-                ? "translate-x-96 w-[360px] h-[360px] rounded-full bg-gray-300"
-                : "translate-x-0 w-[360px] h-[360px] rounded-full bg-gray-300"
+                ? "block translate-x-96 w-[360px] h-[360px] rounded-full bg-gray-300"
+                : "hidden -translate-x-0 w-[360px] h-[360px] rounded-full bg-gray-300"
             }
             style={{ transition: "all 0.5s ease" }}
           ></div>
