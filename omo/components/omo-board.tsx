@@ -38,7 +38,7 @@ export function OmoBoard(overFlow: OmoBoardProps) {
   useEffect(() => {
     console.log("overFlowprops", overFlow.overFlow);
     if (overFlow.overFlow) {
-      if (boardRef.current) boardRef.current.style.display = "block";
+      if (boardRef.current) boardRef.current.style.display = "flex";
     } else {
       console.log("****displaynone****");
       if (boardRef.current) boardRef.current.style.display = "none";

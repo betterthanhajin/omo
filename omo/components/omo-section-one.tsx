@@ -6,7 +6,7 @@ export default function OmoSectionOne() {
     // Start square animation immediately
     setIsSquareExpanded(true);
 
-    setTimeout(() => {
+    const timer2 = setTimeout(() => {
       setIsSquareExpanded(false);
     }, 3000);
     // // Start circle animation after 3 seconds (1s for square animation + 2s delay)
@@ -14,7 +14,10 @@ export default function OmoSectionOne() {
       setIsCircleMoving(true);
     }, 5000);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      clearTimeout(timer2);
+    };
   }, []);
   return (
     <>
