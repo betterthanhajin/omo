@@ -1,20 +1,61 @@
 import Image from "next/image";
 import omoLogo from "@/public/omo-logo.svg";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 
-export default function OmoSectionTwo() {
-  const [direction, setDirection] = useState({ x: 1, y: 1 }); // 이동 방향
-  const stepSize = 50; // 한 번에 이동할 픽셀 수
+export default function OmoSectionsSkills() {
+  const [direction, setDirection] = useState({ x: 1 });
+  const stepSize = 50;
   const [position, setPosition] = useState({ x: 0 });
   const [isInitialRender, setIsInitialRender] = useState(true);
-  const colors = [
-    "#FFB3BA", // 연한 분홍색
-    "#e190f3", // 복숭아색
-    "#FFC0CB", // 분홍색
-    "#FF69B4", // 진한 분홍색
-  ];
   const containerRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<HTMLDivElement>(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const skills = useMemo(
+    () => [
+      { color: "#FFB3BA", name: "NODEJS" },
+      { color: "#e190f3", name: "REACT" },
+      { color: "#FFC0CB", name: "NEXTJS" },
+      { color: "#FF69B4", name: "TYPESCRIPT" },
+    ],
+    []
+  );
+
+  const SkillCircle = ({
+    index,
+    color,
+    skill,
+  }: {
+    index: number;
+    color: string;
+    skill: string;
+  }) => {
+    const isRight = index % 2 === 1;
+    const basePosition = isRight ? "0px" : "calc(100% - 250px)";
+
+    return (
+      <div
+        className={`absolute flex justify-center items-center w-[250px] h-[250px] rounded-full transition-all duration-300 ease-in-out`}
+        style={{
+          left: `calc(${basePosition} + ${
+            isRight ? position.x : -position.x
+          }px)`,
+          backgroundColor: color,
+          transform: hoveredIndex === index ? "scale(1.1)" : "scale(1)",
+        }}
+        onMouseEnter={() => setHoveredIndex(index)}
+        onMouseLeave={() => setHoveredIndex(null)}
+      >
+        <span
+          className={`text-[#ffddfb] font-semibold transition-all duration-300 ${
+            hoveredIndex === index ? "text-white" : ""
+          }`}
+        >
+          {skill}
+        </span>
+      </div>
+    );
+  };
 
   useEffect(() => {
     if (isInitialRender) {
@@ -22,93 +63,61 @@ export default function OmoSectionTwo() {
       setIsInitialRender(false);
       return;
     }
+
     const movingCircle = () => {
-      if (circleRef.current && containerRef.current) {
+      if (containerRef.current) {
         const containerWidth = containerRef.current.offsetWidth;
-        const circleWidth = circleRef.current.offsetWidth;
+        const circleWidth = 250; // Fixed circle width
         const nextX = position.x + stepSize * direction.x;
-        if (nextX > containerWidth || nextX < 0) {
-          setDirection((prev) => ({ ...prev, x: prev.x * -1 }));
+
+        if (nextX > 500 || nextX < 0) {
+          setDirection((prev) => ({ x: prev.x * -1 }));
         }
 
-        setPosition({
-          x: position.x + stepSize * direction.x,
-        });
+        setPosition(() => ({
+          x: nextX,
+        }));
       }
     };
-    let intervalId: NodeJS.Timeout = setInterval(movingCircle, 2000);
+
+    const intervalId = setInterval(movingCircle, 2000);
     return () => clearInterval(intervalId);
   }, [position, direction, isInitialRender]);
 
   return (
-    <>
-      <section>
-        <div className="w-full h-[500px] relative" ref={containerRef}>
-          <div className="flex relative h-[250px]">
-            <div
-              className="absolute flex justify-center items-center w-[250px] h-[250px] rounded-full"
-              style={{
-                left: `${position.x}px`,
-                transition: "all 0.5s ease-in-out",
-                backgroundColor: colors[0],
-              }}
-              ref={circleRef}
-            >
-              <span className="text-[#ffddfb] font-semibold">NODEJS</span>
-            </div>
-            <div
-              className="absolute flex justify-center items-center w-[250px] h-[250px] rounded-full"
-              style={{
-                right: `${position.x}px`,
-                transition: "all 0.5s ease-in-out",
-                backgroundColor: colors[1],
-              }}
-              ref={circleRef}
-            >
-              <span className="text-[#ffddfb] font-semibold">REACT</span>
-            </div>
-          </div>
-          <div
-            className="flex justify-center absolute w-[200px] h-[200px] rounded-full bg-[#DEB4B4] z-50"
-            style={{
-              left: "50%",
-              top: "50%",
-              transform: "translate(-50%, -50%)",
-            }}
-          >
-            <Image
-              src={omoLogo}
-              alt="omo logo"
-              width="100"
-              height="100"
-            ></Image>
-          </div>
-          <div className="flex relative  h-[250px]">
-            <div
-              className="absolute flex justify-center items-center w-[250px] h-[250px] rounded-full"
-              style={{
-                left: `${position.x}px`,
-                transition: "all 0.5s ease-in-out",
-                backgroundColor: colors[2],
-              }}
-              ref={circleRef}
-            >
-              <span className="text-[#ffddfb] font-semibold">NEXTJS</span>
-            </div>
-            <div
-              className="absolute flex justify-center items-center w-[250px] h-[250px] rounded-full"
-              style={{
-                right: `${position.x}px`,
-                transition: "all 0.5s ease-in-out",
-                backgroundColor: colors[3],
-              }}
-              ref={circleRef}
-            >
-              <span className="text-[#ffddfb] font-semibold">TYPESCRIPT</span>
-            </div>
-          </div>
+    <section>
+      <div className="w-full h-[500px] relative" ref={containerRef}>
+        <div className="flex relative h-[250px]">
+          {skills.slice(0, 2).map((skill, index) => (
+            <SkillCircle
+              key={index}
+              index={index}
+              color={skill.color}
+              skill={skill.name}
+            />
+          ))}
         </div>
-      </section>
-    </>
+        <div
+          className="flex justify-center absolute w-[200px] h-[200px] rounded-full bg-[#DEB4B4] z-50"
+          style={{
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <Image src={omoLogo} alt="omo logo" width="100" height="100" />
+        </div>
+        <div className="flex relative h-[250px]">
+          {skills.slice(2, 4).map((skill, index) => (
+            <SkillCircle
+              key={index + 2}
+              index={index + 2}
+              color={skill.color}
+              skill={skill.name}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
