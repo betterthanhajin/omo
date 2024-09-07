@@ -14,6 +14,8 @@ import OmoModern from "../components/omo-modern";
 import OmoWaterColor from "../components/omo-water-color";
 import OmoSectionSkills from "../components/omo-section-skills";
 import OmoSectionMain from "../components/omo-section-main";
+import OmoKitsch from "@/components/omo-kitsch";
+import OmoSea from "@/components/omo-sea";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -26,6 +28,8 @@ export default function Home() {
     OmoModern,
     OmoSectionSkills,
     OmoSectionMain,
+    OmoKitsch,
+    OmoSea,
   ];
   const [currentComponentIndex, setCurrentComponentIndex] = useState(-1);
 
