@@ -3,7 +3,7 @@ import { Fragment, useEffect, useState, useRef } from "react";
 import { OmoHeader } from "@/components/omo-header";
 import OmoSectionOne from "@/components/omo-section-one";
 import OmoSection from "@/components/omo-section";
-import OmoSectionTwo from "@/components/omo-section-two";
+import OmoSectionTwo from "@/components/omo-section-skills";
 import OmoSectionThree from "@/components/omo-section-three";
 import OmoSectionFour from "@/components/omo-section-four";
 import OmoSectionFive from "@/components/omo-section-five";
