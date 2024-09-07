@@ -2,13 +2,14 @@ import Image from "next/image";
 import omoLogo from "@/public/omo-logo.svg";
 import { useState, useEffect, useRef, useMemo } from "react";
 
-export default function OmoSectionsSkills() {
+export default function OmoSectionSkills() {
   const [direction, setDirection] = useState({ x: 1 });
   const stepSize = 50;
   const positionRef = useRef({ x: 0 });
   const [position, setPosition] = useState({ x: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<HTMLDivElement>(null);
+  const [isInitialRender, setIsInitialRender] = useState(true);
   const [, setRender] = useState({});
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -23,29 +24,28 @@ export default function OmoSectionsSkills() {
   );
 
   useEffect(() => {
+    if (isInitialRender) {
+      setPosition({ x: 0 });
+      setIsInitialRender(false);
+      return;
+    }
     const movingCircle = () => {
-      if (containerRef.current) {
-        const containerWidth = containerRef.current.offsetWidth / 2;
-        const circleWidth = 250; // Fixed circle width
-        const maxMove = (containerWidth - circleWidth) / 2;
-        const nextX = stepSize * direction.x;
-
+      if (circleRef.current && containerRef.current) {
+        const containerWidth = containerRef.current.offsetWidth;
+        const circleWidth = circleRef.current.offsetWidth;
+        const nextX = position.x + stepSize * direction.x;
         if (nextX > containerWidth || nextX < 0) {
-          setDirection((prev) => ({ x: prev.x * -1 }));
+          setDirection((prev) => ({ ...prev, x: prev.x * -1 }));
         }
 
-        setPosition((prevPosition) => ({
-          x: position.x + nextX,
-        }));
-
-        console.log("Position updated:", position.x); // 디버깅을 위한 로그
+        setPosition({
+          x: nextX,
+        });
       }
     };
-
-    const intervalId = setInterval(movingCircle, 2000);
+    let intervalId: NodeJS.Timeout = setInterval(movingCircle, 2000);
     return () => clearInterval(intervalId);
-  }, [direction]);
-
+  }, [position, direction, isInitialRender]);
   const SkillCircle = ({
     index,
     color,
@@ -60,8 +60,8 @@ export default function OmoSectionsSkills() {
       <div
         className={`absolute flex justify-center items-center w-[250px] h-[250px] rounded-full transition-all duration-300 ease-in-out`}
         style={{
-          left: position.x,
-          transition: "ease-in-out 0.5s",
+          left: `${position.x}px`,
+          transition: "all 0.5s ease-in-out",
           backgroundColor: color,
           transform: hoveredIndex === index ? "scale(1.1)" : "scale(1)",
         }}
@@ -80,8 +80,8 @@ export default function OmoSectionsSkills() {
       <div
         className={`absolute flex justify-center items-center w-[250px] h-[250px] rounded-full transition-all duration-300 ease-in-out`}
         style={{
-          right: position.x,
-          transition: "ease-in-out 0.5s",
+          right: `${position.x}px`,
+          transition: "all 0.5s ease-in-out",
           backgroundColor: color,
           transform: hoveredIndex === index ? "scale(1.1)" : "scale(1)",
         }}
