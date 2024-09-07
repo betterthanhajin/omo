@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-export default function OmoSectionOne() {
+export default function OmoSectionMain() {
   const [isSquareExpanded, setIsSquareExpanded] = useState(false);
   const [isCircleMoving, setIsCircleMoving] = useState(false);
   useEffect(() => {

@@ -1,20 +1,27 @@
 import Image from "next/image";
 import omoLogo from "@/public/omo-logo.svg";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 
-export default function OmoSectionTwo() {
-  const [direction, setDirection] = useState({ x: 1, y: 1 }); // 이동 방향
-  const stepSize = 50; // 한 번에 이동할 픽셀 수
+export default function OmoSectionSkills() {
+  const [direction, setDirection] = useState({ x: 1 });
+  const stepSize = 50;
+  const positionRef = useRef({ x: 0 });
   const [position, setPosition] = useState({ x: 0 });
-  const [isInitialRender, setIsInitialRender] = useState(true);
-  const colors = [
-    "#FFB3BA", // 연한 분홍색
-    "#e190f3", // 복숭아색
-    "#FFC0CB", // 분홍색
-    "#FF69B4", // 진한 분홍색
-  ];
   const containerRef = useRef<HTMLDivElement>(null);
   const circleRef = useRef<HTMLDivElement>(null);
+  const [isInitialRender, setIsInitialRender] = useState(true);
+  const [, setRender] = useState({});
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const skills = useMemo(
+    () => [
+      { index: 0, color: "#FFB3BA", name: "NODEJS" },
+      { index: 1, color: "#e190f3", name: "REACT" },
+      { index: 2, color: "#FFC0CB", name: "NEXTJS" },
+      { index: 3, color: "#FF69B4", name: "TYPESCRIPT" },
+    ],
+    []
+  );
 
   useEffect(() => {
     if (isInitialRender) {
@@ -32,83 +39,100 @@ export default function OmoSectionTwo() {
         }
 
         setPosition({
-          x: position.x + stepSize * direction.x,
+          x: nextX,
         });
       }
     };
     let intervalId: NodeJS.Timeout = setInterval(movingCircle, 2000);
     return () => clearInterval(intervalId);
   }, [position, direction, isInitialRender]);
+  const SkillCircle = ({
+    index,
+    color,
+    skill,
+  }: {
+    index: number;
+    color: string;
+    skill: string;
+  }) => {
+    const isLeft = index % 2 === 0;
+    return isLeft ? (
+      <div
+        className={`absolute flex justify-center items-center w-[250px] h-[250px] rounded-full transition-all duration-300 ease-in-out`}
+        style={{
+          left: `${position.x}px`,
+          transition: "all 0.5s ease-in-out",
+          backgroundColor: color,
+          transform: hoveredIndex === index ? "scale(1.1)" : "scale(1)",
+        }}
+        onMouseEnter={() => setHoveredIndex(index)}
+        onMouseLeave={() => setHoveredIndex(null)}
+      >
+        <span
+          className={`text-[#ffddfb] font-semibold transition-all duration-300 ${
+            hoveredIndex === index ? "text-white" : ""
+          }`}
+        >
+          {skill}
+        </span>
+      </div>
+    ) : (
+      <div
+        className={`absolute flex justify-center items-center w-[250px] h-[250px] rounded-full transition-all duration-300 ease-in-out`}
+        style={{
+          right: `${position.x}px`,
+          transition: "all 0.5s ease-in-out",
+          backgroundColor: color,
+          transform: hoveredIndex === index ? "scale(1.1)" : "scale(1)",
+        }}
+        onMouseEnter={() => setHoveredIndex(index)}
+        onMouseLeave={() => setHoveredIndex(null)}
+      >
+        <span
+          className={`text-[#ffddfb] font-semibold transition-all duration-300 ${
+            hoveredIndex === index ? "text-white" : ""
+          }`}
+        >
+          {skill}
+        </span>
+      </div>
+    );
+  };
 
   return (
-    <>
-      <section>
-        <div className="w-full h-[500px] relative" ref={containerRef}>
-          <div className="flex relative h-[250px]">
-            <div
-              className="absolute flex justify-center items-center w-[250px] h-[250px] rounded-full"
-              style={{
-                left: `${position.x}px`,
-                transition: "all 0.5s ease-in-out",
-                backgroundColor: colors[0],
-              }}
-              ref={circleRef}
-            >
-              <span className="text-[#ffddfb] font-semibold">NODEJS</span>
-            </div>
-            <div
-              className="absolute flex justify-center items-center w-[250px] h-[250px] rounded-full"
-              style={{
-                right: `${position.x}px`,
-                transition: "all 0.5s ease-in-out",
-                backgroundColor: colors[1],
-              }}
-              ref={circleRef}
-            >
-              <span className="text-[#ffddfb] font-semibold">REACT</span>
-            </div>
-          </div>
-          <div
-            className="flex justify-center absolute w-[200px] h-[200px] rounded-full bg-[#DEB4B4] z-50"
-            style={{
-              left: "50%",
-              top: "50%",
-              transform: "translate(-50%, -50%)",
-            }}
-          >
-            <Image
-              src={omoLogo}
-              alt="omo logo"
-              width="100"
-              height="100"
-            ></Image>
-          </div>
-          <div className="flex relative  h-[250px]">
-            <div
-              className="absolute flex justify-center items-center w-[250px] h-[250px] rounded-full"
-              style={{
-                left: `${position.x}px`,
-                transition: "all 0.5s ease-in-out",
-                backgroundColor: colors[2],
-              }}
-              ref={circleRef}
-            >
-              <span className="text-[#ffddfb] font-semibold">NEXTJS</span>
-            </div>
-            <div
-              className="absolute flex justify-center items-center w-[250px] h-[250px] rounded-full"
-              style={{
-                right: `${position.x}px`,
-                transition: "all 0.5s ease-in-out",
-                backgroundColor: colors[3],
-              }}
-              ref={circleRef}
-            >
-              <span className="text-[#ffddfb] font-semibold">TYPESCRIPT</span>
-            </div>
-          </div>
+    <section>
+      <div className="w-full h-[500px] relative" ref={containerRef}>
+        <div className="flex relative h-[250px]">
+          {skills.slice(0, 2).map((skill, index) => (
+            <SkillCircle
+              key={index}
+              index={skill.index}
+              color={skill.color}
+              skill={skill.name}
+            />
+          ))}
         </div>
-      </section>
-    </>
+        <div
+          className="flex justify-center absolute w-[200px] h-[200px] rounded-full bg-[#DEB4B4] z-50"
+          style={{
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+          }}
+        >
+          <Image src={omoLogo} alt="omo logo" width="100" height="100" />
+        </div>
+        <div className="flex relative h-[250px]">
+          {skills.slice(2, 4).map((skill, index) => (
+            <SkillCircle
+              key={index}
+              index={skill.index}
+              color={skill.color}
+              skill={skill.name}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

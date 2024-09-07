@@ -14,17 +14,20 @@ export function OmoFooter(overFlow: OmoFooterProps) {
   useEffect(() => {
     setCurrentDate(new Date().toLocaleDateString());
   }, []);
-  useEffect(() => {
-    console.log("overFlowpropsfooter", overFlow.overFlow);
-    if (overFlow.overFlow) {
-      if (footerRef.current) footerRef.current.style.display = "block";
-    } else {
-      console.log("****footerdisplaynone****");
-      if (footerRef.current) footerRef.current.style.display = "none";
-    }
-  }, [overFlow]);
+  // useEffect(() => {
+  //   console.log("overFlowpropsfooter", overFlow.overFlow);
+  //   if (overFlow.overFlow) {
+  //     if (footerRef.current) footerRef.current.style.display = "block";
+  //   } else {
+  //     console.log("****footerdisplaynone****");
+  //     if (footerRef.current) footerRef.current.style.display = "none";
+  //   }
+  // }, [overFlow]);
   return (
-    <footer className="bg-[#645555] w-full h-full p-2" ref={footerRef}>
+    <footer
+      className="fixed bottom-0 left-0 right-0 bg-[#645555] w-full p-2"
+      ref={footerRef}
+    >
       <div className="flex justify-center gap-8 items-center">
         <Image src={omoHeart} alt="omo heart" width="40" height="40"></Image>
         <Image src={omoLogo} alt="omo logo" width="40" height="40"></Image>
