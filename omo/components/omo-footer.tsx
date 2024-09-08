@@ -28,7 +28,7 @@ export function OmoFooter({ overFlow }: OmoFooterProps) {
   // * ${overFlow ? "block" : "hidden"}
   return (
     <footer
-      className={`fixed bottom-0 left-0 right-0 bg-[#645555] w-full p-2 
+      className={`bg-[#645555] w-full p-2 
         `}
       ref={footerRef}
     >

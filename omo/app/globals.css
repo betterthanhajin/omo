@@ -86,7 +86,7 @@ html {
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
+  width: 80px;
   height: 34px;
 }
 
@@ -115,7 +115,7 @@ html {
   content: "";
   height: 26px;
   width: 26px;
-  left: 4px;
+  left: 6px;
   bottom: 4px;
   background-color: white;
   -webkit-transition: 0.4s;
@@ -131,9 +131,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  -webkit-transform: translateX(40px);
+  -ms-transform: translateX(40px);
+  transform: translateX(40px);
 }
 
 /* Rounded sliders */

@@ -22,6 +22,16 @@ export default function Home() {
   const [overFlow, setOverFlow] = useState(false);
   const mainRef = useRef<HTMLHtmlElement>(null);
   const totalSlides = 5;
+
+  const concept = [
+    "retro",
+    "watercolor",
+    "modern",
+    "skills",
+    "main",
+    "kitsch",
+    "sea",
+  ];
   const components = [
     OmoRetro,
     OmoWaterColor,
@@ -107,9 +117,12 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <OmoHeader handleSwitchToggle={handleSwitchToggle} />
-      <main className="min-h-screen w-full pb-[0.5rem] pl-0 pr-0 pt-[var(--header-height)]">
+    <div className="flex flex-col h-full">
+      <OmoHeader
+        handleSwitchToggle={handleSwitchToggle}
+        conceptName={concept[currentComponentIndex]}
+      />
+      <main className="h-full w-full pl-0 pr-0 pt-[var(--header-height)] overflow-hidden">
         {CurrentComponent && <CurrentComponent />}
       </main>
       <OmoFooter overFlow={overFlow} />
