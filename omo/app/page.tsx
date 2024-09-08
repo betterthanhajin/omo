@@ -101,17 +101,12 @@ export default function Home() {
   }, []);
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <OmoHeader handleSwitchToggle={handleSwitchToggle} />
-      <main
-        className="h-full w-full p-4 mt-[100px]"
-        // style={{ transform: `translateX(-${currentSlide * 100}vw)` }}
-        ref={mainRef}
-      >
+      <main className="min-h-screen w-full pb-[0.5rem] pl-0 pr-0 pt-[var(--header-height)]">
         {CurrentComponent && <CurrentComponent />}
       </main>
-      {/* <OmoBoard overFlow={overFlow} /> */}
       <OmoFooter overFlow={overFlow} />
-    </>
+    </div>
   );
 }
