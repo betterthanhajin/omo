@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import omoLogo from "@/public/omo-logo.svg";
+import { head } from "framer-motion/client";
 
 const RedHearts = ({ className }: { className?: string }) => (
   <div className={className}>
@@ -39,14 +40,14 @@ export function OmoHeader({
   conceptName: string;
 }) {
   const [currentDate, setCurrentDate] = useState("");
+  const headerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setCurrentDate(new Date().toLocaleDateString());
 
     // 헤더의 높이를 CSS 변수로 설정
-    const header = document.querySelector("header");
-    if (header) {
-      const height = header.offsetHeight;
+    if (headerRef.current) {
+      const height = headerRef.current.offsetHeight;
       document.documentElement.style.setProperty(
         "--header-height",
         `${height}px`
@@ -69,7 +70,10 @@ export function OmoHeader({
           animation: spin 4s linear infinite;
         }
       `}</style>
-      <header className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-2 sm:px-6 pt-2 bg-[#FEA1A1] w-full text-[#645555]">
+      <header
+        className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-2 sm:px-6 pt-2 bg-[#FEA1A1] w-full text-[#645555]"
+        ref={headerRef}
+      >
         <div className="flex items-center gap-1 sm:gap-2">
           <Image
             src={omoLogo}
@@ -78,11 +82,11 @@ export function OmoHeader({
             height="40"
             className="sm:w-[70px] sm:h-[70px]"
           />
-          <span className="font-semibold text-xs sm:text-base">
+          {/* <span className="font-semibold text-xs sm:text-base">
             OMO
             <br />
             Tech Blog
-          </span>
+          </span> */}
         </div>
 
         <div className="text-center flex items-center">
