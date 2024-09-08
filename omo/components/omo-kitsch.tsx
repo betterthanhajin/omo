@@ -1,36 +1,118 @@
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
-export default function OmoKitsch() {
-  const [rotation, setRotation] = useState(0);
+const popArtColors = [
+  "#FF6B6B",
+  "#4ECDC4",
+  "#45B7D1",
+  "#FDCB6E",
+  "#6C5CE7",
+  "#E84393",
+  "#74B9FF",
+  "#55EFC4",
+  "#FFA502",
+  "#D980FA",
+];
+
+type AnimationType = "rotate" | "pulse" | "bounce" | "";
+
+interface CampbellSoupCanProps {
+  delay: number;
+  animationType: AnimationType;
+  backgroundColor: string;
+  textColor: string;
+}
+
+const CampbellSoupCan: React.FC<CampbellSoupCanProps> = ({
+  delay,
+  animationType,
+  backgroundColor,
+  textColor,
+}) => {
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setRotation((prev) => (prev + 5) % 360);
-    }, 50);
-    return () => clearInterval(interval);
+    const timer = setTimeout(() => setIsAnimating(true), delay);
+    return () => clearTimeout(timer);
+  }, [delay]);
+
+  const getAnimationClass = () => {
+    switch (animationType) {
+      case "rotate":
+        return "animate-spin";
+      case "pulse":
+        return "animate-pulse";
+      case "bounce":
+        return "animate-bounce";
+      default:
+        return "";
+    }
+  };
+
+  return (
+    <div
+      className={`w-full h-full flex items-center justify-center ${
+        isAnimating ? getAnimationClass() : ""
+      }`}
+      style={{ transition: "all 0.5s ease-in-out" }}
+    >
+      <div
+        className="w-20 h-28 rounded-md flex flex-col items-center justify-center overflow-hidden border-2 border-gray-800"
+        style={{ backgroundColor }}
+      >
+        <div className="bg-white p-1 rounded mb-1">
+          <span className="text-xs font-bold" style={{ color: textColor }}>
+            CAMPBELL `&apos;`S
+          </span>
+        </div>
+        <div className="bg-white p-1 rounded">
+          <span className="text-xs font-bold" style={{ color: textColor }}>
+            SOUP
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+};
+interface CanData {
+  id: number;
+  delay: number;
+  animationType: AnimationType;
+  backgroundColor: string;
+  textColor: string;
+}
+
+export default function OmoKitsch() {
+  const [cans, setCans] = useState<CanData[]>([]);
+
+  useEffect(() => {
+    const animations: AnimationType[] = ["rotate", "pulse", "bounce", ""];
+    const newCans: CanData[] = Array(32)
+      .fill(null)
+      .map((_, index) => ({
+        id: index,
+        delay: Math.random() * 5000,
+        animationType:
+          animations[Math.floor(Math.random() * animations.length)],
+        backgroundColor:
+          popArtColors[Math.floor(Math.random() * popArtColors.length)],
+        textColor:
+          popArtColors[Math.floor(Math.random() * popArtColors.length)],
+      }));
+    setCans(newCans);
   }, []);
 
   return (
-    <div className="bg-gradient-to-r from-pink-200 via-purple-100 to-yellow-200 p-6 rounded-lg shadow-md overflow-hidden">
-      <h2
-        className="text-2xl font-bold mb-4 text-center"
-        style={{ fontFamily: "Comic Sans MS, cursive" }}
-      >
-        Kitsch
-      </h2>
-      <div className="flex justify-center items-center space-x-4">
-        <div
-          className="w-24 h-24 bg-yellow-300 rounded-full flex items-center justify-center animate-bounce"
-          style={{ transform: `rotate(${rotation}deg)` }}
-        >
-          <span className="text-4xl">😎</span>
-        </div>
-        <div className="w-24 h-24 bg-green-300 rounded-full flex items-center justify-center animate-pulse">
-          <span className="text-4xl">🌈</span>
-        </div>
-        <div className="w-24 h-24 bg-blue-300 rounded-full flex items-center justify-center animate-spin">
-          <span className="text-4xl">🦄</span>
-        </div>
+    <div className="w-full h-screen bg-gray-200 sm:overflow-hidden overflow-y-scroll">
+      <div className="grid sm:grid-cols-8 grid-cols-2 gap-8 p-8 mt-4">
+        {cans.map((can) => (
+          <CampbellSoupCan
+            key={can.id}
+            delay={can.delay}
+            animationType={can.animationType}
+            backgroundColor={can.backgroundColor}
+            textColor={can.textColor}
+          />
+        ))}
       </div>
     </div>
   );

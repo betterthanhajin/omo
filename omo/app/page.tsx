@@ -34,7 +34,9 @@ export default function Home() {
   const [currentComponentIndex, setCurrentComponentIndex] = useState(-1);
 
   const CurrentComponent =
-    currentComponentIndex !== -1 ? components[currentComponentIndex] : null;
+    currentComponentIndex !== -1
+      ? components[currentComponentIndex]
+      : components[5];
 
   const handleSwitchToggle = () => {
     let newIndex;
