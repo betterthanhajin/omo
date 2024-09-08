@@ -100,7 +100,9 @@ export default function OmoSectionSkills() {
   const CircleEffect = ({ className }: { className: string }) => {
     return (
       <div
-        ref={(el) => circleRefs.current.push(el)}
+        ref={(el) => {
+          if (el) circleRefs.current.push(el);
+        }}
         className={`absolute w-4 h-4 rounded-full ${className}`}
         style={{
           left: `${Math.random() * 180 + 100}px`,
