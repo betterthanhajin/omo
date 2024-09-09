@@ -86,7 +86,7 @@ export default function OmoModern() {
             ease: "linear",
           }}
         >
-          <span className="text-white text-4xl font-bold">OMO</span>
+          {/* <span className="text-white text-4xl font-bold">OMO</span> */}
         </motion.div>
       </motion.div>
 
