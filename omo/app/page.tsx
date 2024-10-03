@@ -15,7 +15,6 @@ const OmoSectionSkills = dynamic(
 );
 const OmoSectionMain = dynamic(() => import("../components/omo-section-main"));
 const OmoKitsch = dynamic(() => import("@/components/omo-kitsch"));
-const OmoSea = dynamic(() => import("@/components/omo-sea"));
 
 const components = [
   OmoRetro,
@@ -24,18 +23,9 @@ const components = [
   OmoSectionSkills,
   OmoSectionMain,
   OmoKitsch,
-  OmoSea,
 ];
 
-const concepts = [
-  "retro",
-  "watercolor",
-  "modern",
-  "skills",
-  "main",
-  "kitsch",
-  "sea",
-];
+const concepts = ["retro", "watercolor", "modern", "skills", "main", "kitsch"];
 
 const pageVariants = {
   initial: { opacity: 0, x: "-100%" },
@@ -62,7 +52,6 @@ const OptimizedHomeComponent = () => {
   const handleSwitchToggle = useCallback((isEnabled: boolean) => {
     setIsRandomEnabled(isEnabled);
     if (isEnabled) {
-      // If enabled, switch to a random component
       const newIndex = Math.floor(Math.random() * components.length);
       setCurrentIndex(newIndex);
     }
@@ -133,7 +122,7 @@ const OptimizedHomeComponent = () => {
             exit="out"
             variants={pageVariants}
             transition={pageTransition}
-            className="w-full h-full absolute top-[100px]"
+            className="w-full h-full absolute sm:top-[100px] top-[76px]"
           >
             <CurrentComponent />
           </motion.div>

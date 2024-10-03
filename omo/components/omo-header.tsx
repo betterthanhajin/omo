@@ -78,17 +78,18 @@ export function OmoHeader({
         }
       `}</style>
       <header
-        className="fixed top-0 left-0 right-0 z-50 flex justify-between items-center px-2 sm:px-6 pt-2 bg-[#FEA1A1] w-full text-[#645555]"
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center sm:gap-12 gap-0 items-center px-2 sm:px-6 pt-2 pb-4 bg-[#FEA1A1] w-full text-[#645555]"
         ref={headerRef}
       >
-        <div className="flex items-center gap-1 sm:gap-2">
+        <div className="flex items-center sm:gap-2">
           <Image
             src={omoLogo}
             alt="omo logo"
             width="40"
             height="40"
             className="sm:w-[70px] sm:h-[70px]"
-          />
+          />{" "}
+          {/* <div className="text-[10px] sm:text-sm">{currentDate}</div> */}
           {/* <span className="font-semibold text-xs sm:text-base">
             OMO
             <br />
@@ -98,22 +99,22 @@ export function OmoHeader({
 
         <div className="text-center flex items-center">
           <div className="space-x-2 sm:flex hidden">
-            {[...Array(3)].map((_, i) => (
+            {[...Array(2)].map((_, i) => (
               <RedHearts key={i} className="animate-spin" />
             ))}
           </div>
-          <span className="font-bold text-xl sm:text-3xl text-[#645555]">
+          <span className="ml-2 mr-2 font-bold text-[1.3rem] sm:text-3xl text-[#645555]">
             Hajin Tech Blog
           </span>
           <div className="space-x-2 sm:flex hidden">
-            {[...Array(3)].map((_, i) => (
+            {[...Array(2)].map((_, i) => (
               <RedHearts key={i} className="animate-spin" />
             ))}
           </div>
         </div>
 
-        <div className="flex flex-col items-end">
-          <div className="font-semibold text-xs sm:text-2xl">
+        <div className="flex flex-col">
+          <div className="font-semibold text-xs sm:text-xl flex justify-center">
             <span>{conceptName ?? "kitsch"}</span>
           </div>
           <div className="flex justify-end">
@@ -131,10 +132,9 @@ export function OmoHeader({
               ></span>
             </label>
           </div>
-          <div className="text-[10px] sm:text-xs whitespace-nowrap">
-            {isRandomEnabled ? "Random switching" : "Fixed concept"}
+          <div className="text-[10px] sm:text-xs whitespace-nowrap flex justify-center mt-[0.3rem]">
+            {isRandomEnabled ? "Random" : "Fixed"}
           </div>
-          <div className="text-[10px] sm:text-sm">{currentDate}</div>
         </div>
       </header>
     </>
