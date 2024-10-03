@@ -133,7 +133,7 @@ const OptimizedHomeComponent = () => {
             exit="out"
             variants={pageVariants}
             transition={pageTransition}
-            className="w-full h-full"
+            className="w-full h-full absolute top-[100px]"
           >
             <CurrentComponent />
           </motion.div>

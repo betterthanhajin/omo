@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { useDragControls } from "framer-motion";
 
 const popArtColors = [
   "#FF6B6B",
@@ -15,39 +13,50 @@ const popArtColors = [
   "#D980FA",
 ];
 
+type AnimationType = "rotate" | "pulse" | "bounce" | "";
+
 interface CampbellSoupCanProps {
-  id: number;
+  delay: number;
+  animationType: AnimationType;
   backgroundColor: string;
   textColor: string;
-  position: { x: number; y: number };
-  onDragEnd: (id: number, x: number, y: number) => void;
-  isAnimating: boolean;
 }
 
 const CampbellSoupCan: React.FC<CampbellSoupCanProps> = ({
-  id,
+  delay,
+  animationType,
   backgroundColor,
   textColor,
-  position,
-  onDragEnd,
-  isAnimating,
 }) => {
-  const controls = useDragControls();
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsAnimating(true), delay);
+    return () => clearTimeout(timer);
+  }, [delay]);
+
+  const getAnimationClass = () => {
+    switch (animationType) {
+      case "rotate":
+        return "animate-spin";
+      case "pulse":
+        return "animate-pulse";
+      case "bounce":
+        return "animate-bounce";
+      default:
+        return "";
+    }
+  };
 
   return (
-    <motion.div
-      drag
-      dragControls={controls}
-      dragMomentum={false}
-      onDragEnd={(event, info) => onDragEnd(id, info.point.x, info.point.y)}
-      initial={position}
-      animate={isAnimating ? { rotate: [0, 360], scale: [1, 1.1, 1] } : {}}
-      transition={{ duration: 2, repeat: Infinity }}
-      className="absolute top-0 cursor-move"
-      style={{ width: 80, height: 112 }}
+    <div
+      className={`w-full h-full flex items-center justify-center ${
+        isAnimating ? getAnimationClass() : ""
+      }`}
+      style={{ transition: "all 0.5s ease-in-out" }}
     >
       <div
-        className="w-full h-full rounded-md flex flex-col items-center justify-center overflow-hidden border-2 border-gray-800"
+        className="w-20 h-28 rounded-md flex flex-col items-center justify-center overflow-hidden border-2 border-gray-800"
         style={{ backgroundColor }}
       >
         <div className="bg-white p-1 rounded mb-1">
@@ -61,64 +70,50 @@ const CampbellSoupCan: React.FC<CampbellSoupCanProps> = ({
           </span>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
+interface CanData {
+  id: number;
+  delay: number;
+  animationType: AnimationType;
+  backgroundColor: string;
+  textColor: string;
+}
 
-export default function EnhancedOmoKitsch() {
-  const [cans, setCans] = useState<
-    Array<{
-      id: number;
-      backgroundColor: string;
-      textColor: string;
-      position: { x: number; y: number };
-    }>
-  >([]);
-  const [isAnimating, setIsAnimating] = useState(false);
+export default function OmoKitsch() {
+  const [cans, setCans] = useState<CanData[]>([]);
 
   useEffect(() => {
-    const newCans = Array(32)
+    const animations: AnimationType[] = ["rotate", "pulse", "bounce", ""];
+    const newCans: CanData[] = Array(32)
       .fill(null)
       .map((_, index) => ({
         id: index,
+        delay: Math.random() * 5000,
+        animationType:
+          animations[Math.floor(Math.random() * animations.length)],
         backgroundColor:
           popArtColors[Math.floor(Math.random() * popArtColors.length)],
         textColor:
           popArtColors[Math.floor(Math.random() * popArtColors.length)],
-        position: {
-          x: window.innerWidth - 100,
-          y: window.innerHeight - 140,
-        },
       }));
     setCans(newCans);
   }, []);
 
-  const handleDragEnd = (id: number, x: number, y: number) => {
-    setCans((prevCans) =>
-      prevCans.map((can) =>
-        can.id === id ? { ...can, position: { x, y } } : can
-      )
-    );
-  };
-
-  useEffect(() => {
-    const animationInterval = setInterval(() => {
-      setIsAnimating((prev) => !prev);
-    }, 5000);
-
-    return () => clearInterval(animationInterval);
-  }, []);
-
   return (
-    <div className="w-full h-screen bg-gray-200 relative overflow-hidden">
-      {cans.map((can) => (
-        <CampbellSoupCan
-          key={can.id}
-          {...can}
-          onDragEnd={handleDragEnd}
-          isAnimating={isAnimating}
-        />
-      ))}
+    <div className="w-full h-full bg-gray-200 sm:overflow-hidden overflow-y-scroll">
+      <div className="grid sm:grid-cols-8 grid-cols-2 gap-8 p-16">
+        {cans.map((can) => (
+          <CampbellSoupCan
+            key={can.id}
+            delay={can.delay}
+            animationType={can.animationType}
+            backgroundColor={can.backgroundColor}
+            textColor={can.textColor}
+          />
+        ))}
+      </div>
     </div>
   );
 }
