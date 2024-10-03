@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import omoLogo from "@/public/omo-logo.svg";
 import { head } from "framer-motion/client";
@@ -35,12 +35,15 @@ const RedHearts = ({ className }: { className?: string }) => (
 export function OmoHeader({
   handleSwitchToggle,
   conceptName,
+  isRandomEnabled,
 }: {
-  handleSwitchToggle: () => void;
+  handleSwitchToggle: (isRandomEnabled: boolean) => void;
   conceptName: string;
+  isRandomEnabled: boolean;
 }) {
   const [currentDate, setCurrentDate] = useState("");
   const headerRef = useRef<HTMLDivElement>(null);
+  const sliderRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     setCurrentDate(new Date().toLocaleDateString());
@@ -54,6 +57,10 @@ export function OmoHeader({
       );
     }
   }, []);
+
+  const handleToggle = () => {
+    handleSwitchToggle(!isRandomEnabled);
+  };
 
   return (
     <>
@@ -95,7 +102,7 @@ export function OmoHeader({
               <RedHearts key={i} className="animate-spin" />
             ))}
           </div>
-          <span className="font-bold text-xl sm:text-5xl text-[#645555]">
+          <span className="font-bold text-xl sm:text-3xl text-[#645555]">
             Hajin Tech Blog
           </span>
           <div className="space-x-2 sm:flex hidden">
@@ -107,16 +114,25 @@ export function OmoHeader({
 
         <div className="flex flex-col items-end">
           <div className="font-semibold text-xs sm:text-2xl">
-            <span>{conceptName ?? "kitcsh"}</span>
+            <span>{conceptName ?? "kitsch"}</span>
           </div>
           <div className="flex justify-end">
             <label className="switch">
-              <input type="checkbox" onChange={handleSwitchToggle} />
-              <span className="slider round"></span>
+              <input
+                type="checkbox"
+                checked={isRandomEnabled}
+                onChange={handleToggle}
+              />
+              <span
+                className={`slider round ${
+                  isRandomEnabled ? "bg-pink-400" : "bg-gray-400"
+                }`}
+                ref={sliderRef}
+              ></span>
             </label>
           </div>
           <div className="text-[10px] sm:text-xs whitespace-nowrap">
-            switching concept!!
+            {isRandomEnabled ? "Random switching" : "Fixed concept"}
           </div>
           <div className="text-[10px] sm:text-sm">{currentDate}</div>
         </div>

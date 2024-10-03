@@ -4,7 +4,7 @@ import omoLogo from "@/public/omo-logo.svg";
 import omoHeart from "@/public/omo-heart.svg";
 
 interface OmoFooterProps {
-  overFlow: boolean;
+  overFlow?: boolean;
 }
 
 export function OmoFooter({ overFlow }: OmoFooterProps) {

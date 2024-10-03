@@ -1,131 +1,147 @@
 "use client";
-import { Fragment, useEffect, useState, useRef } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
+import dynamic from "next/dynamic";
 import { OmoHeader } from "@/components/omo-header";
-import OmoSectionOne from "@/components/omo-section-main";
-import OmoSection from "@/components/omo-section";
-import OmoSectionTwo from "@/components/omo-section-skills";
-import OmoSectionThree from "@/components/omo-section-three";
-import OmoSectionFour from "@/components/omo-section-four";
-import OmoSectionFive from "@/components/omo-section-five";
-import { OmoBoard } from "@/components/omo-board";
 import { OmoFooter } from "@/components/omo-footer";
-import OmoRetro from "../components/omo-retro";
-import OmoModern from "../components/omo-modern";
-import OmoWaterColor from "../components/omo-water-color";
-import OmoSectionSkills from "../components/omo-section-skills";
-import OmoSectionMain from "../components/omo-section-main";
-import OmoKitsch from "@/components/omo-kitsch";
-import OmoSea from "@/components/omo-sea";
+import { useMediaQuery } from "react-responsive";
+import { motion, AnimatePresence } from "framer-motion";
 
-export default function Home() {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [overFlow, setOverFlow] = useState(false);
-  const mainRef = useRef<HTMLHtmlElement>(null);
-  const totalSlides = 5;
+// Dynamic imports for code splitting
+const OmoRetro = dynamic(() => import("../components/omo-retro"));
+const OmoWaterColor = dynamic(() => import("../components/omo-water-color"));
+const OmoModern = dynamic(() => import("../components/omo-modern"));
+const OmoSectionSkills = dynamic(
+  () => import("../components/omo-section-skills")
+);
+const OmoSectionMain = dynamic(() => import("../components/omo-section-main"));
+const OmoKitsch = dynamic(() => import("@/components/omo-kitsch"));
+const OmoSea = dynamic(() => import("@/components/omo-sea"));
 
-  const concept = [
-    "retro",
-    "watercolor",
-    "modern",
-    "skills",
-    "main",
-    "kitsch",
-    "sea",
-  ];
-  const components = [
-    OmoRetro,
-    OmoWaterColor,
-    OmoModern,
-    OmoSectionSkills,
-    OmoSectionMain,
-    OmoKitsch,
-    OmoSea,
-  ];
-  const [currentComponentIndex, setCurrentComponentIndex] = useState(-1);
+const components = [
+  OmoRetro,
+  OmoWaterColor,
+  OmoModern,
+  OmoSectionSkills,
+  OmoSectionMain,
+  OmoKitsch,
+  OmoSea,
+];
 
-  const CurrentComponent =
-    currentComponentIndex !== -1
-      ? components[currentComponentIndex]
-      : components[5];
+const concepts = [
+  "retro",
+  "watercolor",
+  "modern",
+  "skills",
+  "main",
+  "kitsch",
+  "sea",
+];
 
-  const handleSwitchToggle = () => {
-    let newIndex;
-    do {
-      newIndex = Math.floor(Math.random() * components.length);
-    } while (newIndex === currentComponentIndex);
-    setCurrentComponentIndex(newIndex);
-  };
+const pageVariants = {
+  initial: { opacity: 0, x: "-100%" },
+  in: { opacity: 1, x: 0 },
+  out: { opacity: 0, x: "100%" },
+};
 
-  // useEffect(() => {
-  //   if (currentSlide === totalSlides - 1) {
-  //     document.body.style.overflowY = "scroll";
-  //     document.documentElement.style.overflowY = "scroll";
-  //     if (mainRef.current) {
-  //       mainRef.current.style.position = "static";
-  //     }
-  //     setOverFlow(true);
-  //   } else {
-  //     document.body.style.overflowY = "hidden";
-  //     document.documentElement.style.overflowY = "hidden";
-  //     console.log("currentSlide***", currentSlide);
-  //     if (mainRef.current) {
-  //       mainRef.current.style.position = "fixed";
-  //       mainRef.current.style.top = "100px";
-  //     }
-  //     setOverFlow(false);
-  //   }
-  // }, [currentSlide]);
+const pageTransition = {
+  type: "tween",
+  ease: "anticipate",
+  duration: 0.5,
+};
 
-  useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      if (e.deltaY > 0) {
-        setCurrentSlide((prev) => Math.min(prev + 1, totalSlides - 1));
-      } else {
-        setCurrentSlide((prev) => Math.max(prev - 1, 0));
-      }
-    };
+const OptimizedHomeComponent = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isRandomEnabled, setIsRandomEnabled] = useState(true);
+  const isMobile = useMediaQuery({ maxWidth: 767 });
 
-    window.addEventListener("wheel", handleWheel);
+  const CurrentComponent = useMemo(
+    () => components[currentIndex],
+    [currentIndex]
+  );
 
-    return () => window.removeEventListener("wheel", handleWheel);
+  const handleSwitchToggle = useCallback((isEnabled: boolean) => {
+    setIsRandomEnabled(isEnabled);
+    if (isEnabled) {
+      // If enabled, switch to a random component
+      const newIndex = Math.floor(Math.random() * components.length);
+      setCurrentIndex(newIndex);
+    }
   }, []);
+
+  const handleSwipe = useCallback(
+    (direction: string) => {
+      if (isRandomEnabled) {
+        const newIndex = Math.floor(Math.random() * components.length);
+        setCurrentIndex(newIndex);
+      } else {
+        if (direction === "left") {
+          setCurrentIndex((prevIndex) => (prevIndex + 1) % components.length);
+        } else if (direction === "right") {
+          setCurrentIndex(
+            (prevIndex) =>
+              (prevIndex - 1 + components.length) % components.length
+          );
+        }
+      }
+    },
+    [isRandomEnabled]
+  );
 
   useEffect(() => {
     let touchStartX = 0;
     let touchEndX = 0;
 
     const handleTouchStart = (e: TouchEvent) => {
-      touchStartX = e.changedTouches[0].screenX;
+      touchStartX = e.touches[0].clientX;
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
-      touchEndX = e.changedTouches[0].screenX;
-      if (touchStartX > touchEndX) {
-        setCurrentSlide((prev) => Math.min(prev + 1, totalSlides - 1));
-      } else {
-        setCurrentSlide((prev) => Math.max(prev - 1, 0));
+      touchEndX = e.changedTouches[0].clientX;
+      if (touchStartX - touchEndX > 50) {
+        handleSwipe("left");
+      } else if (touchEndX - touchStartX > 50) {
+        handleSwipe("right");
       }
     };
 
-    window.addEventListener("touchstart", handleTouchStart);
-    window.addEventListener("touchend", handleTouchEnd);
+    if (isMobile) {
+      window.addEventListener("touchstart", handleTouchStart);
+      window.addEventListener("touchend", handleTouchEnd);
+    }
 
     return () => {
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchend", handleTouchEnd);
+      if (isMobile) {
+        window.removeEventListener("touchstart", handleTouchStart);
+        window.removeEventListener("touchend", handleTouchEnd);
+      }
     };
-  }, []);
+  }, [isMobile, handleSwipe]);
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col min-h-screen">
       <OmoHeader
         handleSwitchToggle={handleSwitchToggle}
-        conceptName={concept[currentComponentIndex]}
+        conceptName={concepts[currentIndex]}
+        isRandomEnabled={isRandomEnabled}
       />
-      <main className="h-full w-full pl-0 pr-0 pt-[var(--header-height)] overflow-hidden">
-        {CurrentComponent && <CurrentComponent />}
+      <main className="flex-grow w-full overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial="initial"
+            animate="in"
+            exit="out"
+            variants={pageVariants}
+            transition={pageTransition}
+            className="w-full h-full"
+          >
+            <CurrentComponent />
+          </motion.div>
+        </AnimatePresence>
       </main>
-      <OmoFooter overFlow={overFlow} />
+      <OmoFooter />
     </div>
   );
-}
+};
+
+export default React.memo(OptimizedHomeComponent);

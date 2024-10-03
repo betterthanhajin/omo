@@ -86,8 +86,8 @@ html {
 .switch {
   position: relative;
   display: inline-block;
-  width: 80px;
-  height: 34px;
+  width: 70px;
+  height: 30px;
 }
 
 /* Hide default HTML checkbox */
@@ -115,8 +115,8 @@ html {
   content: "";
   height: 26px;
   width: 26px;
-  left: 6px;
-  bottom: 4px;
+  left: 2px;
+  bottom: 2px;
   background-color: white;
   -webkit-transition: 0.4s;
   transition: 0.4s;
