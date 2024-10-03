@@ -70,6 +70,10 @@ html {
   width: 100%;
 }
 
+.scroll-width-none {
+  scrollbar-width: none;
+}
+
 /**
  * moving box
 

@@ -12,7 +12,7 @@ export default function OmoSectionMain() {
     // // Start circle animation after 3 seconds (1s for square animation + 2s delay)
     const timer = setTimeout(() => {
       setIsCircleMoving(true);
-    }, 5000);
+    }, 3500);
 
     return () => {
       clearTimeout(timer);

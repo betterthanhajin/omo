@@ -121,7 +121,7 @@ export default function OmoKitsch() {
   }, []);
 
   return (
-    <div className="w-full h-full bg-gray-200 sm:overflow-hidden overflow-y-scroll">
+    <div className="w-full h-full bg-gray-200 sm:overflow-hidden overflow-y-scroll scroll-width-none">
       <div className="grid sm:grid-cols-8 grid-cols-2 gap-8 p-16">
         {cans.map((can) => (
           <CampbellSoupCan
