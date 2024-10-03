@@ -52,7 +52,7 @@ const CampbellSoupCan: React.FC<CampbellSoupCanProps> = ({
       >
         <div className="bg-white p-1 rounded mb-1">
           <span className="text-xs font-bold" style={{ color: textColor }}>
-            CAMPBELL'S
+            CAMPBELLS
           </span>
         </div>
         <div className="bg-white p-1 rounded">
