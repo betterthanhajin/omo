@@ -15,17 +15,19 @@ const OmoSectionSkills = dynamic(
 );
 const OmoSectionMain = dynamic(() => import("../components/omo-section-main"));
 const OmoKitsch = dynamic(() => import("@/components/omo-kitsch"));
+const OmoRoadMap = dynamic(() => import("@/components/omo-roadmap"));
 
 const components = [
-  OmoRetro,
-  OmoWaterColor,
-  OmoModern,
-  OmoSectionSkills,
+  // OmoRetro,
+  // OmoWaterColor,
+  // OmoModern,
+  // OmoSectionSkills,
   OmoSectionMain,
   OmoKitsch,
+  OmoRoadMap,
 ];
-
-const concepts = ["retro", "watercolor", "modern", "skills", "main", "kitsch"];
+// * , "main", "kitsch" , "skills", "main"
+const concepts = ["retro", "watercolor", "modern"];
 
 const pageVariants = {
   initial: { opacity: 0, x: "-100%" },

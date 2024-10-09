@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
+import PostItBoard from "./omo-postIt";
 export default function OmoSectionMain() {
   const [isSquareExpanded, setIsSquareExpanded] = useState(false);
   const [isCircleMoving, setIsCircleMoving] = useState(false);
+
   useEffect(() => {
     // Start square animation immediately
     setIsSquareExpanded(true);
@@ -24,6 +26,7 @@ export default function OmoSectionMain() {
       <section className="bg-[#FEA1A1] w-full h-full">
         <div>
           <div>
+            <PostItBoard />
             <div
               className={
                 isSquareExpanded

@@ -129,9 +129,9 @@ export default function OmoSectionSkills() {
           <Image
             src={omoLogo}
             alt="omo logo"
-            width="120"
-            height="120"
-            className="rounded-full bg-white p-3 shadow-lg"
+            width={120}
+            height={120}
+            className="bg-white rounded-full shadow-lg"
           />
         </motion.div>
         <motion.div

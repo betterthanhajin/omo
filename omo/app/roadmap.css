@@ -1,0 +1,923 @@
+.wrapper {
+  position: absolute;
+  top: 0;
+}
+
+.wrapper2 {
+  position: absolute;
+  left: 300px;
+}
+
+.wrapper3 {
+  position: absolute;
+  left: 600px;
+}
+
+.wrapper4 {
+  position: absolute;
+  left: 900px;
+}
+
+.wrapper5 {
+  position: absolute;
+  left: 1200px;
+}
+
+.wrapper6 {
+  position: absolute;
+  left: 1500px;
+}
+
+.container {
+  cursor: pointer;
+  /* margin-bottom: 10px; */
+  transform: rotate(0);
+  transition: transform 0.3s linear;
+}
+
+.container {
+  width: 300px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: aquamarine;
+}
+
+.inner {
+  width: 150px;
+  height: 150px;
+  background-color: rgb(107, 222, 184);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container:hover {
+  transform: rotate(-80deg);
+  opacity: 0;
+}
+
+.section03 {
+  position: relative;
+  background-color: #d9913f;
+  height: 1300px;
+}
+
+.image {
+  position: absolute;
+  top: 10%;
+  right: 20%;
+}
+
+.image2 {
+  position: absolute;
+  top: 60%;
+  right: -33%;
+}
+
+.image2 img {
+  width: 50%;
+}
+
+.section04 {
+  height: 400px;
+  background-color: #b6f96f;
+}
+
+section.active .imageWrap img {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0, 0);
+}
+
+section.active .imageWrap span {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0, 0);
+}
+
+#innerWrap {
+  position: absolute;
+  top: 0;
+  left: 3%;
+  z-index: 100;
+  padding: 60px;
+  width: 340px;
+  margin-top: 150px;
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+#innerWrap1 {
+  position: absolute;
+  top: 0;
+  right: 3%;
+  z-index: 100;
+  padding: 60px;
+  width: 340px;
+  margin-top: 150px;
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+#innerWrap2 {
+  position: absolute;
+  top: 30%;
+  left: 3%;
+  z-index: 100;
+  padding: 60px;
+  width: 340px;
+  margin-top: 150px;
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+#innerWrap3 {
+  position: absolute;
+  top: 30%;
+  right: 3%;
+  z-index: 100;
+  padding: 60px;
+  width: 340px;
+  margin-top: 150px;
+  z-index: 50;
+  background-color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+.imageGroup {
+  position: absolute;
+  left: 30%;
+  top: 15%;
+  width: 40%;
+  height: 520px;
+  background-color: aquamarine;
+  z-index: 999;
+}
+
+.imageWrap {
+  position: absolute;
+  width: 30%;
+  height: 30%;
+  left: 30%;
+  top: 15%;
+}
+
+/* 왼쪽 신발 */
+.imageWrap img {
+  position: absolute;
+  width: 200px;
+  transition: all 1s ease-in-out;
+  visibility: hidden;
+  opacity: 0;
+  transform: translate(-400px, -350px) rotate(-10deg);
+}
+
+/* 오른쪽 신발 */
+.imageWrap span {
+  position: absolute;
+  top: 100px;
+  left: 200px;
+  width: 20px;
+  font-weight: bold;
+  font-size: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition-delay: 0.2s;
+  transform: translate(-400px, -350px) rotate(-10deg);
+}
+
+.right {
+  position: relative;
+}
+
+.loadtext {
+  /* position: absolute;
+    bottom:40%;
+    right:3%;   */
+  margin-top: 8%;
+  margin-left: 0%;
+}
+
+.loadtext li {
+  display: inline-block;
+  margin-right: 60px;
+}
+
+.pointtext {
+  position: absolute;
+  top: 130%;
+  left: 3%;
+}
+
+.pointtext li {
+  display: inline-block;
+  margin-right: 30px;
+  font-weight: bold;
+}
+
+.mainCircle {
+  /* position: relative; */
+  background-color: chartreuse;
+}
+
+.skills {
+  position: absolute;
+  left: 47%;
+  top: 40%;
+  font-size: 36px;
+  font-weight: bold;
+  z-index: 999;
+}
+
+.rotateCircle {
+  background-color: #dcaa71;
+  position: absolute;
+  left: 35%;
+  top: 10%;
+  width: 600px;
+  height: 600px;
+  border-radius: 40%;
+  transform: translate(-50%, -50%);
+  animation: rotateAni 10s ease infinite;
+  transition: left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes rotateAni {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.section00 {
+  background-color: aquamarine;
+}
+
+.buttonWrap {
+  position: fixed;
+  bottom: 5vh;
+  text-align: center;
+  width: 100%;
+}
+
+.buttonWrap button {
+  padding: 6px 20px;
+  margin: 0 3px;
+  background-color: #000;
+  color: #fff;
+  transition: all 0.3s ease-out;
+}
+
+.buttonWrap button:hover {
+  background-color: #fff;
+  color: #000;
+}
+
+.buttonWrap .pointWrapper {
+  position: relative;
+  display: inline-block;
+  padding: 0 10px;
+}
+
+.buttonWrap .pointWrapper li {
+  position: relative;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 5px;
+  text-align: center;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 50%;
+  transition: background 0.3s ease-out;
+}
+
+.buttonWrap .pointWrapper li.active {
+  background-color: black;
+}
+
+.group {
+  width: 650px;
+  height: 300px;
+  position: relative;
+  margin: auto;
+  overflow: hidden;
+  background-color: blueviolet;
+  /* z-index:999; */
+}
+
+.slide {
+  position: absolute;
+  overflow: hidden;
+  transition: 0.5s ease-in-out;
+}
+
+.item {
+  margin-left: 15px;
+  display: inline-block;
+}
+
+.creative {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: rgb(255, 253, 129);
+  display: inline-block;
+}
+
+.creative > span {
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.variety {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: rgb(180, 254, 230);
+  display: inline-block;
+}
+
+.variety > span {
+  font-weight: bold;
+  font-size: 20px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.passion {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-color: rgb(131, 222, 135);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: inline-block;
+}
+
+.passion > span {
+  font-weight: bold;
+  font-size: 20px;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+h2 {
+  margin: 0;
+}
+
+.title {
+  width: 680px;
+  margin: 100px auto;
+  font-size: 25px;
+  text-align: center;
+  background-color: #b6f96f;
+}
+
+input[id="trigger"] {
+  display: none;
+}
+
+/* label 중에 for가 trigger인 항목 */
+label[for="trigger"] {
+  /* border: 1px solid red; */
+  width: 30px;
+  height: 20px;
+  display: block;
+  position: relative;
+  cursor: pointer;
+}
+
+/* label 중에 for가 trigger인 항목 안의 span */
+label[for="trigger"] span {
+  display: block;
+  height: 3px;
+  background-color: #000;
+  left: 20%;
+  width: 100%;
+  position: absolute;
+  transition: 0.3s;
+  z-index: 1000;
+}
+
+/* label[for=trigger] > span의 n번째 요소 */
+label[for="trigger"] span:nth-child(1) {
+  top: 50%;
+}
+
+label[for="trigger"] span:nth-child(2) {
+  top: 100%;
+}
+
+label[for="trigger"] span:nth-child(3) {
+  top: 150%;
+}
+
+/* check시 변하는 label[for=trigger] > span의 n번째 요소  */
+input[id="trigger"]:checked + label span:nth-child(1) {
+  top: 50%;
+  transform: rotate(45deg);
+}
+
+input[id="trigger"]:checked + label span:nth-child(2) {
+  opacity: 0;
+}
+
+input[id="trigger"]:checked + label span:nth-child(3) {
+  top: 50%;
+  transform: rotate(-45deg);
+}
+
+/* 사이드바 */
+.sidebar {
+  width: 1920px;
+  height: 300vh;
+  background-color: pink;
+  position: fixed;
+  top: 0;
+  left: -1920px;
+  transition: 0.3s;
+  z-index: 999 !important;
+  display: flex;
+}
+
+.sidebarPoint {
+  justify-content: left;
+}
+
+.til {
+  justify-content: right;
+}
+
+/* input[id=trigger]가 체크되었을 때 사이드바가 나오는 형제 인접자 */
+input[id="trigger"]:checked ~ .sidebar {
+  left: 0;
+}
+
+/* check시 같이 밀려나가는 CSS 햄버거 메뉴 */
+input[id="trigger"]:checked + label[for="trigger"] {
+  left: 1800px;
+  transition: 0.3s;
+}
+
+.first {
+  position: relative;
+  width: 100%;
+  height: 85px;
+}
+
+.mainline {
+  position: absolute;
+  top: 107%;
+  left: 0;
+  width: 900px;
+  border-bottom: 4px solid #d9913f;
+}
+
+.point {
+  position: absolute;
+  top: 95%;
+  left: 4%;
+}
+
+.point > li {
+  display: inline-block;
+  /* width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin-right: 65px;
+        background-color: #d9913f; */
+}
+
+.points {
+  cursor: pointer;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #dcaa71;
+  border: none;
+}
+
+.loadMap {
+  position: absolute;
+  top: 75.5%;
+  right: 3%;
+}
+
+/* .map {
+    width:600px;
+    height:25px;    
+    background: linear-gradient(10deg,#fff841, #d9913f);
+    border-radius: 15px;
+} */
+body,
+html,
+nav {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+nav {
+  width: 100%;
+  height: 50px;
+  background-color: rgb(234, 181, 117);
+}
+
+section {
+  overflow: hidden;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+.pointWrap {
+  position: fixed;
+  right: 3vw;
+  top: 40%;
+  z-index: 100;
+}
+
+.pointWrap > li {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-top: 10px;
+  border: 1px solid black;
+}
+
+.line {
+  position: absolute;
+  bottom: 40%;
+  right: 0;
+  width: 890px;
+  border-bottom: 4px solid #d9913f;
+}
+
+.loadPoint {
+  position: absolute;
+  top: 43%;
+  right: -30%;
+  width: 870px;
+}
+
+.loadPoint > li {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 65px;
+  background-color: #d9913f;
+}
+
+section {
+  width: 100%;
+  height: 900px;
+  position: relative;
+}
+
+.section02 {
+  position: relative;
+  height: 1000px;
+  background-color: rgb(242, 132, 105);
+}
+
+.section0 {
+  width: 100%;
+  height: 900px;
+  /* margin: 0 auto; */
+  background-color: rgb(250, 250, 215);
+  /* position: relative; */
+}
+
+.skillCircle {
+  display: flex;
+  justify-content: left;
+}
+
+h1 {
+  height: 30px;
+  margin: 10px 200px;
+  border-bottom: 1px solid black;
+  width: 150px;
+}
+
+.mainImage {
+  position: absolute;
+  top: 15%;
+  left: 40%;
+}
+
+.level {
+  position: absolute;
+  top: 10%;
+  left: 46%;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.img {
+  width: 300px;
+  z-index: 999;
+}
+
+.circleGroup {
+  position: relative;
+  height: 600px;
+}
+
+.circleGroup2 {
+  position: absolute;
+  right: 0%;
+  bottom: 50%;
+  width: 30%;
+  height: 600px;
+}
+
+#circle0 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 180px;
+  background-color: rgb(242, 132, 105);
+  border-radius: 50%;
+  /* opacity: 0.5; */
+}
+
+#circle1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  background-color: rgb(134, 225, 138);
+  border-radius: 50%;
+  /* opacity: 0.5; */
+}
+
+#circle2 {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  width: 80px;
+  height: 80px;
+  background-color: rgb(81, 239, 194);
+  border-radius: 50%;
+  /* opacity: 0.5; */
+}
+
+#circle3 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  background-color: rgb(249, 255, 77);
+  border-radius: 50%;
+  /* opacity: 0.5; */
+}
+
+#circle4 {
+  position: absolute;
+  bottom: 20%;
+  right: 40%;
+  width: 200px;
+  height: 200px;
+  background-color: rgb(238, 139, 238);
+  border-radius: 50%;
+  /* opacity: 0.5; */
+}
+
+#circle5 {
+  position: absolute;
+  bottom: 50%;
+  left: 10%;
+  width: 90px;
+  height: 90px;
+  background-color: rgb(98, 174, 249);
+  border-radius: 50%;
+  /* opacity: 0.5; */
+}
+
+#circle6 {
+  position: absolute;
+  top: 60%;
+  left: 60%;
+  width: 50px;
+  height: 50px;
+  background-color: rgb(186, 122, 255);
+  border-radius: 50%;
+  /* opacity: 0.5; */
+}
+
+#circle7 {
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  width: 110px;
+  height: 110px;
+  background-color: rgb(241, 124, 104);
+  border-radius: 50%;
+  /* opacity: 0.5; */
+}
+
+#circle8 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 180px;
+  background-color: rgb(242, 132, 105);
+  border-radius: 50%;
+  /* opacity: 0.5; */
+}
+
+#circle9 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  background-color: rgb(134, 225, 138);
+  border-radius: 50%;
+  /* opacity: 0.5; */
+}
+
+#circle10 {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  width: 80px;
+  height: 80px;
+  background-color: rgb(81, 239, 194);
+  border-radius: 50%;
+  /* opacity: 0.5; */
+}
+
+#circle11 {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  background-color: rgb(249, 255, 77);
+  border-radius: 50%;
+  /* opacity: 0.5; */
+}
+
+#circle12 {
+  position: absolute;
+  bottom: 20%;
+  right: 40%;
+  width: 200px;
+  height: 200px;
+  background-color: rgb(238, 139, 238);
+  border-radius: 50%;
+  /* opacity: 0.5; */
+}
+
+#circle13 {
+  position: absolute;
+  bottom: 50%;
+  left: 10%;
+  width: 90px;
+  height: 90px;
+  background-color: rgb(98, 174, 249);
+  border-radius: 50%;
+  /* opacity: 0.5; */
+}
+
+#circle14 {
+  position: absolute;
+  top: 60%;
+  left: 60%;
+  width: 50px;
+  height: 50px;
+  background-color: rgb(186, 122, 255);
+  border-radius: 50%;
+  /* opacity: 0.5; */
+}
+
+#circle15 {
+  position: absolute;
+  top: 20%;
+  right: 10%;
+  width: 110px;
+  height: 110px;
+  background-color: rgb(241, 124, 104);
+  border-radius: 50%;
+  /* opacity: 0.5; */
+}
+
+#circle0,
+#circle1,
+#circle2,
+#circle3,
+#circle4,
+#circle5,
+#circle6,
+#circle7,
+#circle8,
+#circle9,
+#circle10,
+#circle11,
+#circle12,
+#circle13,
+#circle14,
+#circle15 > span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#circle0:hover {
+  width: 120px;
+  height: 120px;
+  transition: 0.3s;
+}
+
+#circle1:hover {
+  width: 120px;
+  height: 120px;
+  transition: 0.3s;
+}
+
+#circle2:hover {
+  width: 120px;
+  height: 120px;
+  transition: 0.3s;
+}
+
+#circle3:hover {
+  width: 120px;
+  height: 120px;
+  transition: 0.3s;
+}
+
+#circle4:hover {
+  width: 120px;
+  height: 120px;
+  transition: 0.3s;
+}
+
+#circle5:hover {
+  width: 120px;
+  height: 120px;
+  transition: 0.3s;
+}
+
+#circle6:hover {
+  width: 120px;
+  height: 120px;
+  transition: 0.3s;
+}
+
+#circle7:hover {
+  width: 120px;
+  height: 120px;
+  transition: 0.3s;
+}
+
+.circleGroup {
+  width: 300px;
+  /* background-color:rgb(195, 253, 138); */
+}
+
+.pointWrap li.active {
+  background-color: rgb(239, 140, 47);
+}
+
+.name {
+  font-size: 50px;
+  text-align: center;
+  height: 20px;
+  /* border-bottom:1px solid black; */
+}
