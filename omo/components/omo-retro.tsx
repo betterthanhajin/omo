@@ -9,9 +9,9 @@ export default function OmoRetro() {
   };
 
   return (
-    <div className="relative h-full bg-gradient-to-br from-purple-800 to-pink-500 overflow-x-hidden">
+    <div className="relative h-full bg-gradient-to-br bg-pink-400 overflow-x-hidden">
       {/* Disco ball */}
-      <motion.div
+      {/* <motion.div
         className="absolute top-10 left-1/2 transform -translate-x-1/2 w-32 h-32 rounded-full"
         style={{
           background:
@@ -62,26 +62,27 @@ export default function OmoRetro() {
             }}
           />
         ))}
-      </motion.div>
-
-      {/* Dance floor */}
-      <div className="absolute bottom-0 left-0 right-0 h-1/2 grid grid-cols-8 grid-rows-8">
-        {[...Array(64)].map((_, index) => (
+      </motion.div> */}
+      {/* Home floor */}
+      <div className="absolute bottom-0 left-0 right-0 h-full grid grid-cols-8 grid-rows-8">
+        {[...Array(128)].map((_, index) => (
           <motion.div
             key={index}
             className="bg-white"
+            style={{
+              backgroundColor: getRandomColor(),
+            }}
             animate={{
               opacity: isPlaying ? [0.2, 1, 0.2] : 0.2,
             }}
             transition={{
-              duration: 0.5,
+              duration: 0.8,
               repeat: Infinity,
               delay: Math.random() * 0.5,
             }}
           />
         ))}
       </div>
-
       {/* Album title */}
       {/* <motion.h2
         className="absolute top-4 left-4 text-6xl font-bold text-white"
@@ -93,19 +94,17 @@ export default function OmoRetro() {
       >
         Get Up
       </motion.h2> */}
-
       {/* Play button */}
-      <motion.button
+      {/* <motion.button
         className="absolute bottom-4 right-4 px-6 py-2 bg-yellow-400 text-purple-800 rounded-full font-bold text-xl"
         onClick={togglePlay}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
         {isPlaying ? "Pause" : "Play"}
-      </motion.button>
-
+      </motion.button> */}
       {/* NewJeans members (stylized) */}
-      {["Minji", "Hanni", "Danielle", "Haerin", "Hyein"].map(
+      {/* {["Minji", "Hanni", "Danielle", "Haerin", "Hyein"].map(
         (member, index) => (
           <motion.div
             key={member}
@@ -152,19 +151,19 @@ export default function OmoRetro() {
             </svg>
           </motion.div>
         )
-      )}
+      )} */}
     </div>
   );
 }
 
 function getRandomColor() {
   const colors = [
-    "#FF6B6B",
-    "#4ECDC4",
-    "#45B7D1",
-    "#FDCB6E",
-    "#6C5CE7",
-    "#55E6C1",
+    "rgba(255, 107, 107, 0.5)",
+    "rgba(78, 205, 196, 0.5)",
+    "rgba(69, 183, 209, 0.5)",
+    "rgba(253, 203, 110, 0.5)",
+    "rgba(108, 92, 231, 0.5)",
+    "rgba(85, 230, 193, 0.5)",
   ];
   return colors[Math.floor(Math.random() * colors.length)];
 }
