@@ -94,11 +94,10 @@ const SkillsRoadmap = () => {
   }
 
   return (
-    <section className="section0">
-      <div className="first">
-        <div className="mainline"></div>
-        <ul className="point">
-          {[...Array(7)].map((_, i) => (
+    <section className="w-full h-full">
+      <ul className="point">
+        {["인터넷", "HTML", "CSS", "JAVASCRIPT", "GITHUB", "NPM", "VUEJS"].map(
+          (skill, i) => (
             <li key={i}>
               <button
                 className="points"
@@ -107,26 +106,14 @@ const SkillsRoadmap = () => {
                   top: 5,
                   left: `${i * 100}px`,
                 }}
-              ></button>
+              >
+                {" "}
+                <span className="text-xs">{skill}</span>
+              </button>
             </li>
-          ))}
-        </ul>
-        <ul className="pointtext">
-          {[
-            "인터넷",
-            "HTML",
-            "CSS",
-            "JAVASCRIPT",
-            "GITHUB",
-            "NPM",
-            "VUEJS",
-          ].map((skill, i) => (
-            <li key={i}>
-              <span>{skill}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
+          )
+        )}
+      </ul>
 
       <div className="circleGroup" ref={circleRef}>
         {[
@@ -148,13 +135,14 @@ const SkillsRoadmap = () => {
         ))}
       </div>
 
-      <div className="mainCircle">
-        <div className="skills">
-          my skills
-          <br />
-          road map
+      <div className="rotateCircleBox relative">
+        <div className="rotateCircle">
+          <div className="rotateTitle">
+            my skills
+            <br />
+            road map
+          </div>
         </div>
-        <div className="rotateCircle"></div>
       </div>
 
       <div className="right">

@@ -115,7 +115,7 @@ export function OmoHeader({
 
         <div className="flex flex-col">
           <div className="font-semibold text-xs sm:text-xl flex justify-center">
-            {/* <span>{conceptName ?? "kitsch"}</span> */}
+            <span>{conceptName ?? ""}</span>
           </div>
           <div className="flex justify-end">
             <label className="switch">
@@ -132,9 +132,9 @@ export function OmoHeader({
               ></span>
             </label>
           </div>
-          {/* <div className="text-[10px] sm:text-xs whitespace-nowrap flex justify-center mt-[0.3rem]">
+          <div className="text-[10px] sm:text-xs whitespace-nowrap flex justify-center mt-[0.3rem]">
             {isRandomEnabled ? "Random" : "Fixed"}
-          </div> */}
+          </div>
         </div>
       </header>
     </>

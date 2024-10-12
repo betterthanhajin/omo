@@ -18,7 +18,7 @@ const OmoKitsch = dynamic(() => import("@/components/omo-kitsch"));
 const OmoRoadMap = dynamic(() => import("@/components/omo-roadmap"));
 
 const components = [
-  // OmoRetro,
+  OmoRetro,
   // OmoWaterColor,
   // OmoModern,
   // OmoSectionSkills,
@@ -27,7 +27,7 @@ const components = [
   OmoRoadMap,
 ];
 // * , "main", "kitsch" , "skills", "main"
-const concepts = ["retro", "watercolor", "modern"];
+const concepts = ["omo - 01", "omo - 02", "omo - 03", "omo - 04"];
 
 const pageVariants = {
   initial: { opacity: 0, x: "-100%" },
@@ -50,12 +50,15 @@ const OptimizedHomeComponent = () => {
     () => components[currentIndex],
     [currentIndex]
   );
-
+  let newIndex = 0;
   const handleSwitchToggle = useCallback((isEnabled: boolean) => {
     setIsRandomEnabled(isEnabled);
     if (isEnabled) {
-      const newIndex = Math.floor(Math.random() * components.length);
       setCurrentIndex(newIndex);
+      newIndex++;
+      if (newIndex === components.length) {
+        newIndex = 0;
+      }
     }
   }, []);
 
@@ -130,7 +133,6 @@ const OptimizedHomeComponent = () => {
           </motion.div>
         </AnimatePresence>
       </main>
-      <OmoFooter />
     </div>
   );
 };
