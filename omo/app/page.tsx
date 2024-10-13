@@ -112,13 +112,14 @@ const OptimizedHomeComponent = () => {
   }, [isMobile, handleSwipe]);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <>
+      {" "}
       <OmoHeader
         handleSwitchToggle={handleSwitchToggle}
         conceptName={concepts[currentIndex]}
         isRandomEnabled={isRandomEnabled}
       />
-      <main className="flex-grow w-full overflow-hidden">
+      <main className="absolute top-20 flex-grow w-full h-full overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
@@ -127,13 +128,13 @@ const OptimizedHomeComponent = () => {
             exit="out"
             variants={pageVariants}
             transition={pageTransition}
-            className="w-full h-full absolute sm:top-[100px] top-[76px]"
+            className="w-full h-full"
           >
             <CurrentComponent />
           </motion.div>
         </AnimatePresence>
       </main>
-    </div>
+    </>
   );
 };
 

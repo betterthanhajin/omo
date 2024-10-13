@@ -1,3 +1,4 @@
+import { circle } from "framer-motion/client";
 import React, { useState, useEffect, useRef } from "react";
 
 const SkillsRoadmap = () => {
@@ -7,45 +8,50 @@ const SkillsRoadmap = () => {
   const circleRef2 = useRef<HTMLDivElement>(null);
   let circles1 = document.querySelectorAll(".circle1");
 
-  let random = Math.floor(Math.random() * 300);
-  let random2 = Math.floor(Math.random() * 400);
-  const mouseX = random;
-  const mouseY = random2;
-  for (let i = 0; i < circles.length; i++) {
-    (circles[i] as HTMLElement).style.left = Math.random() * 300 + "px";
-    (circles[i] as HTMLElement).style.top = Math.random() * 400 + "px";
-    (circles[i] as HTMLElement).style.transition = "1s";
-  }
+  const circleRect = circleRef.current?.getBoundingClientRect();
+  console.log(circleRect?.top);
+  if (circleRect && circleRect.top) {
+    let random = Math.floor(Math.random() * circleRect.right);
+    let random2 = Math.floor(Math.random() * circleRect.top);
+    const mouseX = random;
+    const mouseY = random2;
 
-  for (let i = 0; i < circles1.length; i++) {
-    (circles1[i] as HTMLElement).style.left = mouseX + "px";
-    (circles1[i] as HTMLElement).style.top = mouseY + "px";
-    (circles1[i] as HTMLElement).style.transition = "1s";
-  }
-  // });
-  let j = 0;
-  if (circleRef.current) {
-    circleRef.current.addEventListener("mouseover", function () {
-      for (let i = 0; i < circles.length; i++) {
-        (circles[i] as HTMLElement).style.left = mouseX + "px";
-        (circles[i] as HTMLElement).style.top = mouseY + "px";
-        (circles[i] as HTMLElement).style.transition = "1s";
-      }
-    });
+    for (let i = 0; i < circles.length; i++) {
+      (circles[i] as HTMLElement).style.left = mouseX + "px";
+      (circles[i] as HTMLElement).style.top = mouseY + "px";
+      (circles[i] as HTMLElement).style.transition = "1s";
+    }
 
-    circleRef.current.addEventListener("mouseout", function () {
-      let random = Math.floor(Math.random() * 180 + 100);
-      let random2 = Math.floor(Math.random() * 480 + 200);
-      const mouseX = random;
-      const mouseY = random2;
-      (circles[j] as HTMLElement).style.left = mouseX + "px";
-      (circles[j] as HTMLElement).style.top = mouseY + "px";
-      (circles[j] as HTMLElement).style.transition = "1.25s";
-      j++;
-      if (j == circles.length) {
-        j = 0;
-      }
-    });
+    for (let i = 0; i < circles1.length; i++) {
+      (circles1[i] as HTMLElement).style.left = Math.random() * mouseX + "px";
+      (circles1[i] as HTMLElement).style.top = Math.random() * mouseY + "px";
+      (circles1[i] as HTMLElement).style.transition = "1s";
+    }
+
+    let j = 0;
+    if (circleRef.current) {
+      circleRef.current.addEventListener("mouseover", function () {
+        for (let i = 0; i < circles.length; i++) {
+          (circles[i] as HTMLElement).style.left = mouseX + "px";
+          (circles[i] as HTMLElement).style.top = mouseY + "px";
+          (circles[i] as HTMLElement).style.transition = "1s";
+        }
+      });
+
+      circleRef.current.addEventListener("mouseout", function () {
+        let random = Math.floor(Math.random() * 180 + 100);
+        let random2 = Math.floor(Math.random() * 480 + 200);
+        const mouseX = random;
+        const mouseY = random2;
+        (circles[j] as HTMLElement).style.left = mouseX + "px";
+        (circles[j] as HTMLElement).style.top = mouseY + "px";
+        (circles[j] as HTMLElement).style.transition = "1.25s";
+        j++;
+        if (j == circles.length) {
+          j = 0;
+        }
+      });
+    }
   }
 
   let k = 0;
@@ -99,24 +105,22 @@ const SkillsRoadmap = () => {
 
   return (
     <section className="w-full h-full flex justify-between flex-nowrap">
-      <ul className="point">
-        {["인터넷", "HTML", "CSS", "JAVASCRIPT", "GITHUB", "NPM"].map(
-          (skill, i) => (
-            <li key={i}>
-              <button
-                className="points"
-                style={{
-                  position: "absolute",
-                  top: 5,
-                  left: `${i * 100}px`,
-                }}
-              >
-                {" "}
-                <span className="text-xs w-8 inline-block">{skill}</span>
-              </button>
-            </li>
-          )
-        )}
+      <ul className="w-full sticky h-[10%] border-b-[#dcaa71] border-b-4">
+        {["인터넷", "HTML", "CSS", "JAVASCRIPT", "GITHUB"].map((skill, i) => (
+          <li key={i}>
+            <button
+              className="points"
+              style={{
+                position: "absolute",
+                top: 78,
+                left: `${i * 100}px`,
+              }}
+            >
+              {" "}
+              <span className="text-xs w-8 inline-block">{skill}</span>
+            </button>
+          </li>
+        ))}
         <div className="circleGroup" ref={circleRef}>
           {[
             "Java",
@@ -148,52 +152,50 @@ const SkillsRoadmap = () => {
         </div>
       </div>
 
-      <div className="circleGroup" ref={circleRef2}>
-        {[
-          "Java",
-          "Javascript",
-          "Vue JS",
-          "Spring boot",
-          "Spring MVC",
-          "BootStrap",
-          "vuetify",
-          "SQL",
-          "Java",
-          "Javascript",
-          "Vue JS",
-        ].map((skill, i) => (
-          <div key={i} id={`circle${i}`} className="circle1">
-            <span>{skill}</span>
-          </div>
-        ))}
-      </div>
-      <div className="relative">
-        <ul className="point">
-          {["인터넷", "HTML", "CSS", "JAVASCRIPT", "GITHUB", "NPM"].map(
-            (skill, i) => (
-              <li
-                key={i}
+      <ul className="w-full sticky h-[80%] border-b-[#dcaa71] border-b-4">
+        {["인터넷", "HTML", "CSS", "JAVASCRIPT", "GITHUB", "NPM"].map(
+          (skill, i) => (
+            <li
+              key={i}
+              style={{
+                position: "absolute",
+                bottom: 10,
+                display: "inline-block",
+              }}
+            >
+              <button
+                className="points"
                 style={{
                   position: "absolute",
-                  bottom: 10,
-                  display: "inline-block",
+                  right: `${i * -100}px`,
                 }}
               >
-                <button
-                  className="points"
-                  style={{
-                    position: "absolute",
-                    right: `${i * 100}px`,
-                  }}
-                >
-                  {" "}
-                  <span className="text-xs w-8 inline-block">{skill}</span>
-                </button>
-              </li>
-            )
-          )}
-        </ul>
-      </div>
+                {" "}
+                <span className="text-xs w-8 inline-block">{skill}</span>
+              </button>
+            </li>
+          )
+        )}
+        <div className="circleGroup" ref={circleRef2}>
+          {[
+            "Java",
+            "Javascript",
+            "Vue JS",
+            "Spring boot",
+            "Spring MVC",
+            "BootStrap",
+            "vuetify",
+            "SQL",
+            "Java",
+            "Javascript",
+            "Vue JS",
+          ].map((skill, i) => (
+            <div key={i} id={`circle${i}`} className="circle1">
+              <span>{skill}</span>
+            </div>
+          ))}
+        </div>
+      </ul>
     </section>
   );
 };

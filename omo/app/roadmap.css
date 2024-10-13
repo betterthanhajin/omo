@@ -217,7 +217,7 @@ section.active .imageWrap span {
 }
 
 .rotateCircle {
-  padding: 180px 150px 180px 150px;
+  padding: 110px 150px;
   background-color: #dcaa71;
   border-radius: 40%;
   animation: rotateAni 10s ease infinite;
@@ -469,8 +469,8 @@ input[id="trigger"]:checked + label[for="trigger"] {
 }
 
 .point {
+  width: 900px;
   position: sticky;
-  width: 30%;
   height: 20px;
   border-bottom: 3px solid #dcaa71;
 }
@@ -865,11 +865,6 @@ h1 {
   width: 120px;
   height: 120px;
   transition: 0.3s;
-}
-
-.circleGroup {
-  width: 300px;
-  /* background-color:rgb(195, 253, 138); */
 }
 
 .pointWrap li.active {
