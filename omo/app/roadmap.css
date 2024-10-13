@@ -191,10 +191,6 @@ section.active .imageWrap span {
   transform: translate(-400px, -350px) rotate(-10deg);
 }
 
-.right {
-  position: relative;
-}
-
 .loadtext {
   /* position: absolute;
     bottom:40%;
@@ -220,17 +216,9 @@ section.active .imageWrap span {
   font-weight: bold;
 }
 
-.rotateCircleBox {
-  width: 100%;
-}
-
 .rotateCircle {
+  padding: 180px 150px 180px 150px;
   background-color: #dcaa71;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  padding: 200px;
   border-radius: 40%;
   animation: rotateAni 10s ease infinite;
   transition: left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -481,15 +469,14 @@ input[id="trigger"]:checked + label[for="trigger"] {
 }
 
 .point {
-  position: relative;
-  width: 645px;
+  position: sticky;
+  width: 30%;
   height: 20px;
   border-bottom: 3px solid #dcaa71;
 }
 
 .point > li {
   position: absolute;
-  top: 10px;
   display: inline-block;
 }
 
@@ -500,12 +487,6 @@ input[id="trigger"]:checked + label[for="trigger"] {
   border-radius: 50%;
   background: #dcaa71;
   border: none;
-}
-
-.loadMap {
-  position: absolute;
-  top: 75.5%;
-  right: 3%;
 }
 
 body,

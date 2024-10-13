@@ -7,13 +7,13 @@ const SkillsRoadmap = () => {
   const circleRef2 = useRef<HTMLDivElement>(null);
   let circles1 = document.querySelectorAll(".circle1");
 
-  let random = Math.floor(Math.random() * 180);
-  let random2 = Math.floor(Math.random() * 480);
+  let random = Math.floor(Math.random() * 300);
+  let random2 = Math.floor(Math.random() * 400);
   const mouseX = random;
   const mouseY = random2;
   for (let i = 0; i < circles.length; i++) {
-    (circles[i] as HTMLElement).style.left = mouseX + "px";
-    (circles[i] as HTMLElement).style.top = mouseY + "px";
+    (circles[i] as HTMLElement).style.left = Math.random() * 300 + "px";
+    (circles[i] as HTMLElement).style.top = Math.random() * 400 + "px";
     (circles[i] as HTMLElement).style.transition = "1s";
   }
 
@@ -25,6 +25,14 @@ const SkillsRoadmap = () => {
   // });
   let j = 0;
   if (circleRef.current) {
+    circleRef.current.addEventListener("mouseover", function () {
+      for (let i = 0; i < circles.length; i++) {
+        (circles[i] as HTMLElement).style.left = mouseX + "px";
+        (circles[i] as HTMLElement).style.top = mouseY + "px";
+        (circles[i] as HTMLElement).style.transition = "1s";
+      }
+    });
+
     circleRef.current.addEventListener("mouseout", function () {
       let random = Math.floor(Math.random() * 180 + 100);
       let random2 = Math.floor(Math.random() * 480 + 200);
@@ -61,11 +69,7 @@ const SkillsRoadmap = () => {
   var pointBtn = document.querySelectorAll(".pointWrap li");
   var sidebarPoint = document.querySelectorAll(".sidebarPoint li");
   var sidebar = document.getElementsByClassName("sidebar");
-  var trigger = document.getElementById("trigger");
-  var hambuger0 = document.getElementById("hambuger");
-  var hambuger = document.getElementById("hambuger > span");
   var pageNum = 0;
-  var totalNum = section.length;
 
   for (var i = 0; i < pointBtn.length; i++) {
     (function (idx) {
@@ -94,9 +98,9 @@ const SkillsRoadmap = () => {
   }
 
   return (
-    <section className="w-full h-full">
+    <section className="w-full h-full flex justify-between flex-nowrap">
       <ul className="point">
-        {["인터넷", "HTML", "CSS", "JAVASCRIPT", "GITHUB", "NPM", "VUEJS"].map(
+        {["인터넷", "HTML", "CSS", "JAVASCRIPT", "GITHUB", "NPM"].map(
           (skill, i) => (
             <li key={i}>
               <button
@@ -108,45 +112,12 @@ const SkillsRoadmap = () => {
                 }}
               >
                 {" "}
-                <span className="text-xs">{skill}</span>
+                <span className="text-xs w-8 inline-block">{skill}</span>
               </button>
             </li>
           )
         )}
-      </ul>
-
-      <div className="circleGroup" ref={circleRef}>
-        {[
-          "Java",
-          "Javascript",
-          "Vue JS",
-          "Spring boot",
-          "Spring MVC",
-          "BootStrap",
-          "vuetify",
-          "SQL",
-          "GIT HUB",
-          "VSCODE",
-          "CS",
-        ].map((skill, i) => (
-          <div key={i} id={`circle${i}`} className="circle0">
-            <span>{skill}</span>
-          </div>
-        ))}
-      </div>
-
-      <div className="rotateCircleBox relative">
-        <div className="rotateCircle">
-          <div className="rotateTitle">
-            my skills
-            <br />
-            road map
-          </div>
-        </div>
-      </div>
-
-      <div className="right">
-        <div className="circleGroup2" ref={circleRef2}>
+        <div className="circleGroup" ref={circleRef}>
           {[
             "Java",
             "Javascript",
@@ -156,35 +127,72 @@ const SkillsRoadmap = () => {
             "BootStrap",
             "vuetify",
             "SQL",
-            "Java",
-            "Javascript",
-            "Vue JS",
+            "GIT HUB",
+            "VSCODE",
+            "CS",
           ].map((skill, i) => (
-            <div key={i} id={`circle${i}`} className="circle1">
+            <div key={i} id={`circle${i}`} className="circle0">
               <span>{skill}</span>
             </div>
           ))}
         </div>
-        <div className="loadMap">
-          <div className="line"></div>
-          <ul className="loadPoint">
-            {[...Array(7)].map((_, i) => (
-              <li key={i}></li>
-            ))}
-          </ul>
-          <ul
-            className="loadtext"
-            style={{ fontSize: "15px", fontWeight: "bold" }}
-          >
-            {["HTML", "CSS", "JAVASCRIPT", "GITHUB", "NPM", "VUEJS"].map(
-              (skill, i) => (
-                <li key={i}>
-                  <span>{skill}</span>
-                </li>
-              )
-            )}
-          </ul>
+      </ul>
+
+      <div className="relative top-[100px]">
+        <div className="rotateCircle">
+          <div className="rotateTitle">
+            my skills
+            <br />
+            road map
+          </div>
         </div>
+      </div>
+
+      <div className="circleGroup" ref={circleRef2}>
+        {[
+          "Java",
+          "Javascript",
+          "Vue JS",
+          "Spring boot",
+          "Spring MVC",
+          "BootStrap",
+          "vuetify",
+          "SQL",
+          "Java",
+          "Javascript",
+          "Vue JS",
+        ].map((skill, i) => (
+          <div key={i} id={`circle${i}`} className="circle1">
+            <span>{skill}</span>
+          </div>
+        ))}
+      </div>
+      <div className="relative">
+        <ul className="point">
+          {["인터넷", "HTML", "CSS", "JAVASCRIPT", "GITHUB", "NPM"].map(
+            (skill, i) => (
+              <li
+                key={i}
+                style={{
+                  position: "absolute",
+                  bottom: 10,
+                  display: "inline-block",
+                }}
+              >
+                <button
+                  className="points"
+                  style={{
+                    position: "absolute",
+                    right: `${i * 100}px`,
+                  }}
+                >
+                  {" "}
+                  <span className="text-xs w-8 inline-block">{skill}</span>
+                </button>
+              </li>
+            )
+          )}
+        </ul>
       </div>
     </section>
   );
