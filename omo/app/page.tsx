@@ -54,11 +54,7 @@ const OptimizedHomeComponent = () => {
   const handleSwitchToggle = useCallback((isEnabled: boolean) => {
     setIsRandomEnabled(isEnabled);
     if (isEnabled) {
-      setCurrentIndex(newIndex);
-      newIndex++;
-      if (newIndex === components.length) {
-        newIndex = 0;
-      }
+      setCurrentIndex((prev) => (prev + 1) % components.length);
     }
   }, []);
 

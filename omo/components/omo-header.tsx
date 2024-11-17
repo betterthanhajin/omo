@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback, use } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import omoLogo from "@/public/omo-logo.png";
 import Link from "next/link";
@@ -18,7 +18,6 @@ export function OmoHeader({
 
   useEffect(() => {
     setCurrentDate(new Date().toLocaleDateString());
-
     // 헤더의 높이를 CSS 변수로 설정
     if (headerRef.current) {
       const height = headerRef.current.offsetHeight;
@@ -50,48 +49,21 @@ export function OmoHeader({
       >
         <div className="flex items-center sm:gap-2">
           <Link href="/">
-            <Image src={omoLogo} alt="omo logo" width="60" height="60" />{" "}
+            <Image src={omoLogo} alt="omo logo" width="60" height="60" />
           </Link>
-          {/* <div className="text-[10px] sm:text-sm">{currentDate}</div> */}
-          {/* <span className="font-semibold text-xs sm:text-base">
-            OMO
-            <br />
-            Tech Blog
-          </span> */}
         </div>
-
         <div className="text-center flex items-center">
-          {/* <div className="space-x-2 sm:flex hidden">
-            {[...Array(2)].map((_, i) => (
-              <RedHearts key={i} className="animate-spin" />
-            ))}
-          </div> */}
           <span className="ml-2 mr-2 font-bold text-[1rem] sm:text-xl text-[#645555]">
             오모시로이 블로그
           </span>
-          {/* <div className="space-x-2 sm:flex hidden">
-            {[...Array(2)].map((_, i) => (
-              <RedHearts key={i} className="animate-spin" />
-            ))}
-          </div> */}
         </div>
-
         <div className="flex flex-col">
-          {/* <div className="font-semibold text-xs sm:text-xl flex justify-center">
-            <span>{conceptName ?? ""}</span>
-          </div> */}
           <div className="flex justify-end">
             <label className="switch">
               <input
                 type="checkbox"
                 checked={isRandomEnabled}
-                onChange={() => {
-                  const handleToggle = () => {
-                    console.log("handleToggle", isRandomEnabled);
-                    handleSwitchToggle(!isRandomEnabled);
-                  };
-                  handleToggle();
-                }}
+                onChange={() => handleSwitchToggle(!isRandomEnabled)}
               />
               <span
                 className={`slider round ${
@@ -102,7 +74,7 @@ export function OmoHeader({
             </label>
           </div>
           <div className="text-[10px] sm:text-xs whitespace-nowrap flex justify-center mt-[0.1rem]">
-            {isRandomEnabled ? "Random" : "Fixed"}
+            {isRandomEnabled ? "switch on !" : "switch off !"}
           </div>
         </div>
       </header>

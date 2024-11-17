@@ -3,6 +3,7 @@ import Image from "next/image";
 import omoArrow from "@/public/omo-arrow.svg";
 import omoArrowWhite from "@/public/arrow-white.svg";
 import omoSearch from "@/public/omo-search.svg";
+import { Sticker } from "lucide-react";
 
 interface omoTitle {
   title: string;
@@ -95,15 +96,25 @@ export function OmoBoard(overFlow: OmoBoardProps) {
               ))}
             </ul>
           </div>
-          {contentData.map((item, index) => (
-            <div
-              key={index}
-              className="w-1/2 p-8"
-              style={{ display: hoverIndex === index ? "block" : "none" }}
-            >
-              {item.content}
-            </div>
-          ))}
+          <div className="bg-[#febcbc] rounded-md w-1/2">
+            {contentData.map((item, index) => (
+              <div
+                key={index}
+                className="w-1/2 p-8"
+                style={{ display: hoverIndex === index ? "block" : "none" }}
+              >
+                {item.content}
+              </div>
+            ))}
+            {hoverIndex === null && (
+              <>
+                <div className="p-8 flex flex-col justify-center items-center w-full h-full">
+                  <Sticker size={50} />
+                  <p className="text-center">블로그 글을 선택해주세요!</p>
+                </div>
+              </>
+            )}
+          </div>
         </div>
       )}
     </>
