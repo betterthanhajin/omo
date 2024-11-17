@@ -106,7 +106,7 @@ const PostItBoard = () => {
   };
 
   return (
-    <div className="flex flex-wrap justify-center items-center min-h-screen bg-gray-100">
+    <div className="flex flex-wrap justify-center items-center min-h-screen">
       {postIts.map((postIt) => (
         <PostIt
           key={postIt.id}

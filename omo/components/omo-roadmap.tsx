@@ -104,24 +104,29 @@ const SkillsRoadmap = () => {
   }
 
   return (
-    <section className="w-full h-full flex justify-between flex-nowrap">
-      <ul className="w-full sticky h-[10%] border-b-[#dcaa71] border-b-4">
-        {["인터넷", "HTML", "CSS", "JAVASCRIPT", "GITHUB"].map((skill, i) => (
-          <li key={i}>
-            <button
-              className="points"
-              style={{
-                position: "absolute",
-                top: 78,
-                left: `${i * 100}px`,
-              }}
-            >
-              {" "}
-              <span className="text-xs w-8 inline-block">{skill}</span>
-            </button>
-          </li>
-        ))}
-        <div className="circleGroup" ref={circleRef}>
+    <section className="w-full h-full flex flex-col gap-20">
+      <ul className="w-[600px] sticky h-[10%] border-b-[#dcaa71] border-b-4">
+        {["인터넷", "HTML", "CSS", "JAVASCRIPT", "GITHUB", "GITHUB"].map(
+          (skill, i) => (
+            <li key={i}>
+              <button
+                className="points"
+                style={{
+                  position: "absolute",
+                  top: 85,
+                  left: `${i * 100}px`,
+                }}
+              >
+                {" "}
+                <span className="text-xs w-8 inline-block mt-4">{skill}</span>
+              </button>
+            </li>
+          )
+        )}
+      </ul>
+
+      <div className="flex flex-row">
+        <div ref={circleRef}>
           {[
             "Java",
             "Javascript",
@@ -140,19 +145,35 @@ const SkillsRoadmap = () => {
             </div>
           ))}
         </div>
-      </ul>
-
-      <div className="relative top-[100px]">
-        <div className="rotateCircle">
+        <div className="rotateCircle w-40 h-40 justify-center">
           <div className="rotateTitle">
             my skills
             <br />
             road map
           </div>
         </div>
+        <div ref={circleRef2}>
+          {[
+            "Java",
+            "Javascript",
+            "Vue JS",
+            "Spring boot",
+            "Spring MVC",
+            "BootStrap",
+            "vuetify",
+            "SQL",
+            "Java",
+            "Javascript",
+            "Vue JS",
+          ].map((skill, i) => (
+            <div key={i} id={`circle${i}`} className="circle1">
+              <span>{skill}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <ul className="w-full sticky h-[80%] border-b-[#dcaa71] border-b-4">
+      <ul className="w-full sticky h-[10%] border-b-[#dcaa71] border-b-4">
         {["인터넷", "HTML", "CSS", "JAVASCRIPT", "GITHUB", "NPM"].map(
           (skill, i) => (
             <li
@@ -176,25 +197,6 @@ const SkillsRoadmap = () => {
             </li>
           )
         )}
-        <div className="circleGroup" ref={circleRef2}>
-          {[
-            "Java",
-            "Javascript",
-            "Vue JS",
-            "Spring boot",
-            "Spring MVC",
-            "BootStrap",
-            "vuetify",
-            "SQL",
-            "Java",
-            "Javascript",
-            "Vue JS",
-          ].map((skill, i) => (
-            <div key={i} id={`circle${i}`} className="circle1">
-              <span>{skill}</span>
-            </div>
-          ))}
-        </div>
       </ul>
     </section>
   );

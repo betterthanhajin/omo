@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, use } from "react";
 import Image from "next/image";
-import omoLogo from "@/public/omo-logo-1.png";
+import omoLogo from "@/public/omo-logo.png";
+import Link from "next/link";
 
 export function OmoHeader({
   handleSwitchToggle,
@@ -28,10 +29,6 @@ export function OmoHeader({
     }
   }, []);
 
-  const handleToggle = () => {
-    handleSwitchToggle(!isRandomEnabled);
-  };
-
   return (
     <>
       <style jsx>{`
@@ -48,11 +45,13 @@ export function OmoHeader({
         }
       `}</style>
       <header
-        className="fixed top-0 left-0 right-0 z-50 flex justify-left sm:gap-12 gap-0 items-center p-2 sm:px-6 w-full text-[#645555]"
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center sm:gap-12 gap-0 items-center p-2 sm:px-6 w-full text-[#645555]"
         ref={headerRef}
       >
         <div className="flex items-center sm:gap-2">
-          <Image src={omoLogo} alt="omo logo" width="60" height="60" />{" "}
+          <Link href="/">
+            <Image src={omoLogo} alt="omo logo" width="60" height="60" />{" "}
+          </Link>
           {/* <div className="text-[10px] sm:text-sm">{currentDate}</div> */}
           {/* <span className="font-semibold text-xs sm:text-base">
             OMO
@@ -68,7 +67,7 @@ export function OmoHeader({
             ))}
           </div> */}
           <span className="ml-2 mr-2 font-bold text-[1rem] sm:text-xl text-[#645555]">
-            Tech Blog
+            오모시로이 블로그
           </span>
           {/* <div className="space-x-2 sm:flex hidden">
             {[...Array(2)].map((_, i) => (
@@ -86,7 +85,13 @@ export function OmoHeader({
               <input
                 type="checkbox"
                 checked={isRandomEnabled}
-                onChange={handleToggle}
+                onChange={() => {
+                  const handleToggle = () => {
+                    console.log("handleToggle", isRandomEnabled);
+                    handleSwitchToggle(!isRandomEnabled);
+                  };
+                  handleToggle();
+                }}
               />
               <span
                 className={`slider round ${
@@ -96,9 +101,9 @@ export function OmoHeader({
               ></span>
             </label>
           </div>
-          {/* <div className="text-[10px] sm:text-xs whitespace-nowrap flex justify-center mt-[0.3rem]">
+          <div className="text-[10px] sm:text-xs whitespace-nowrap flex justify-center mt-[0.1rem]">
             {isRandomEnabled ? "Random" : "Fixed"}
-          </div> */}
+          </div>
         </div>
       </header>
     </>

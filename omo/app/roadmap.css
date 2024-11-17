@@ -167,7 +167,6 @@ section.active .imageWrap span {
   top: 15%;
 }
 
-/* 왼쪽 신발 */
 .imageWrap img {
   position: absolute;
   width: 200px;
@@ -177,7 +176,6 @@ section.active .imageWrap span {
   transform: translate(-400px, -350px) rotate(-10deg);
 }
 
-/* 오른쪽 신발 */
 .imageWrap span {
   position: absolute;
   top: 100px;
@@ -241,10 +239,6 @@ section.active .imageWrap span {
   100% {
     transform: rotate(360deg);
   }
-}
-
-.section00 {
-  background-color: aquamarine;
 }
 
 .buttonWrap {
@@ -613,7 +607,7 @@ h1 {
 }
 
 .circleGroup2 {
-  position: absolute;
+  position: relative;
   right: 0%;
   bottom: 50%;
   width: 30%;
