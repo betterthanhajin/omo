@@ -119,7 +119,7 @@ const OptimizedHomeComponent = () => {
         conceptName={concepts[currentIndex]}
         isRandomEnabled={isRandomEnabled}
       />
-      <main className="absolute top-20 flex-grow w-full h-full overflow-hidden">
+      <main className="absolute top-24 flex-grow w-full h-full overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
