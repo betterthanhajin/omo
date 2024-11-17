@@ -49,13 +49,9 @@ export function OmoBoard(overFlow: OmoBoardProps) {
     <>
       {overFlow && (
         <div className="flex min-h-40 h-full w-full" ref={boardRef}>
-          <div className="w-1/2 bg-[#EBEAEA]">
-            <div className="flex w-full bg-white p-2">
-              <input
-                type="text"
-                className="w-full p-1"
-                placeholder="검색....."
-              />
+          <div className="w-1/2 bg-[#e2e2e2]">
+            <div className="flex w-full items-center bg-white p-2">
+              <input type="text" className="w-full p-2" placeholder="검색..." />
               <Image
                 src={omoSearch}
                 alt="omo search"
@@ -68,7 +64,7 @@ export function OmoBoard(overFlow: OmoBoardProps) {
               {titledata.map((item, index) => (
                 <li
                   key={index}
-                  className="flex gap-2 p-2 text-[#645555] hover:bg-[#645555] hover:text-white"
+                  className="flex gap-2 p-3 text-[#645555] hover:bg-[#645555] hover:text-white"
                   onMouseOver={() => {
                     setHoverIndex(index);
                   }}
@@ -80,7 +76,7 @@ export function OmoBoard(overFlow: OmoBoardProps) {
                   }}
                 >
                   <div>{item.title}</div>
-                  {hoverIndex === index ? ( // Check if the current item is being hovered
+                  {hoverIndex === index ? (
                     <Image
                       src={omoArrowWhite}
                       alt="omo arrow white"
