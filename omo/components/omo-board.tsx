@@ -3,7 +3,7 @@ import Image from "next/image";
 import omoArrow from "@/public/omo-arrow.svg";
 import omoArrowWhite from "@/public/arrow-white.svg";
 import omoSearch from "@/public/omo-search.svg";
-import { Sticker } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 interface omoTitle {
   title: string;
@@ -18,63 +18,66 @@ interface OmoBoardProps {
 }
 
 export function OmoBoard(overFlow: OmoBoardProps) {
-  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [titledata, setTitleData] = useState<omoTitle[]>([]);
-  const [contentData, setContentData] = useState<omoContent[]>([]);
+  const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const boardRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     const dummyData: omoTitle[] = Array.from({ length: 10 }, (_, i) => ({
-      title: `props 를 통해 컴포넌트에게 값 전달하기`,
+      title: `props 를 통해 컴포넌트에게 값 전달하기.ㅁ니ㅏㄹㅇ늬람ㄴ리ㅏㅁㅇ느리ㅏㅁㄴ을미나ㅡㄹ니`,
     }));
-
-    const contentData: omoContent[] = Array.from({ length: 10 }, (_, i) => ({
-      content: `내용...............ㅁ루ㅏㅇ나룽ㄴ미ㅜㄴ이ㅏㅊㅁ나ㅣ + ${i}`,
-    }));
-
     setTitleData(dummyData);
-    setContentData(contentData);
   }, []);
 
   useEffect(() => {
-    console.log("overFlowprops", overFlow.overFlow);
     if (overFlow.overFlow) {
       if (boardRef.current) boardRef.current.style.display = "flex";
     } else {
-      console.log("****displaynone****");
       if (boardRef.current) boardRef.current.style.display = "none";
     }
   }, [overFlow]);
+
+  const handleItemClick = (index: number) => {
+    setHoverIndex(index);
+    // URL 파라미터로 index 전달
+    router.push(`../omo-board-detail?index=${index}`);
+  };
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const searchValue = e.target.value;
+    const filteredData = titledata.filter((item) =>
+      item.title.includes(searchValue)
+    );
+    setTitleData(filteredData);
+    if (!filteredData) {
+      setTitleData(titledata);
+    }
+  };
 
   return (
     <>
       {overFlow && (
         <div className="flex min-h-40 h-full w-full" ref={boardRef}>
-          <div className="w-1/2 bg-[#e2e2e2]">
+          <div className="w-full bg-[#e2e2e2]">
             <div className="flex w-full items-center gap-4 bg-white p-2 border-t border-[#c0c0c0]">
-              <input type="text" className="w-full p-2" placeholder="검색..." />
-              <Image
-                src={omoSearch}
-                alt="omo search"
-                width="20"
-                height="20"
-              ></Image>
+              <input
+                type="text"
+                className="w-full p-2"
+                placeholder="검색..."
+                onChange={handleSearch}
+              />
+              <Image src={omoSearch} alt="omo search" width="20" height="20" />
             </div>
 
             <ul>
               {titledata.map((item, index) => (
                 <li
                   key={index}
-                  className="flex gap-2 p-3 text-[#645555] hover:bg-[#645555] hover:text-white"
-                  onMouseOver={() => {
-                    setHoverIndex(index);
-                  }}
-                  onMouseLeave={() => {
-                    setHoverIndex(null);
-                  }}
-                  onClick={() => {
-                    setHoverIndex(index);
-                  }}
+                  className="flex gap-2 p-4 text-[#645555] hover:bg-[#645555] border-b-[0.5px] border-[#645555] hover:text-white"
+                  onMouseOver={() => setHoverIndex(index)}
+                  onMouseLeave={() => setHoverIndex(null)}
+                  onClick={() => handleItemClick(index)}
                 >
                   <div>{item.title}</div>
                   {hoverIndex === index ? (
@@ -83,37 +86,18 @@ export function OmoBoard(overFlow: OmoBoardProps) {
                       alt="omo arrow white"
                       width="10"
                       height="10"
-                    ></Image>
+                    />
                   ) : (
                     <Image
                       src={omoArrow}
                       alt="omo arrow"
                       width="10"
                       height="10"
-                    ></Image>
+                    />
                   )}
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="bg-[#ff8a8a] rounded-md w-1/2">
-            {contentData.map((item, index) => (
-              <div
-                key={index}
-                className="w-1/2 p-8"
-                style={{ display: hoverIndex === index ? "block" : "none" }}
-              >
-                {item.content}
-              </div>
-            ))}
-            {hoverIndex === null && (
-              <>
-                <div className="p-8 flex flex-col justify-center items-center w-full h-full">
-                  <Sticker size={50} />
-                  <p className="text-center">블로그 글을 선택해주세요!</p>
-                </div>
-              </>
-            )}
           </div>
         </div>
       )}
