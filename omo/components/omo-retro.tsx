@@ -34,6 +34,9 @@ export default function OmoRetro() {
                 onHoverStart={() => {
                   setIsHovered(true);
                 }}
+                onTouchStart={() => {
+                  setIsHovered(true);
+                }}
               />
             ))}
           </div>

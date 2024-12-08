@@ -44,7 +44,7 @@ export function OmoHeader({
         }
       `}</style>
       <header
-        className="fixed top-0 left-0 right-0 z-50 flex justify-center sm:gap-12 gap-0 items-center p-2 sm:px-6 w-full text-[#645555]"
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center h-[60px] sm:gap-12 gap-0 items-center p-2 sm:px-6 w-full text-[#645555]"
         ref={headerRef}
       >
         <div className="flex items-center sm:gap-2">
@@ -73,9 +73,9 @@ export function OmoHeader({
               ></span>
             </label>
           </div>
-          <div className="text-[10px] sm:text-xs whitespace-nowrap flex justify-center mt-[0.1rem]">
+          {/* <div className="text-[10px] sm:text-xs whitespace-nowrap flex justify-center mt-[0.1rem]">
             {isRandomEnabled ? "switch on !" : "switch off !"}
-          </div>
+          </div> */}
         </div>
       </header>
     </>

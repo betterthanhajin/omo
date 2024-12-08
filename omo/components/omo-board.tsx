@@ -51,7 +51,7 @@ export function OmoBoard(overFlow: OmoBoardProps) {
       {overFlow && (
         <div className="flex min-h-40 h-full w-full" ref={boardRef}>
           <div className="w-1/2 bg-[#e2e2e2]">
-            <div className="flex w-full items-center bg-white p-2">
+            <div className="flex w-full items-center gap-4 bg-white p-2 border-t border-[#c0c0c0]">
               <input type="text" className="w-full p-2" placeholder="검색..." />
               <Image
                 src={omoSearch}
@@ -96,7 +96,7 @@ export function OmoBoard(overFlow: OmoBoardProps) {
               ))}
             </ul>
           </div>
-          <div className="bg-[#febcbc] rounded-md w-1/2">
+          <div className="bg-[#ff8a8a] rounded-md w-1/2">
             {contentData.map((item, index) => (
               <div
                 key={index}
