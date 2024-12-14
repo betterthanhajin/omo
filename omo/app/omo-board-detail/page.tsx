@@ -23,11 +23,11 @@ function OmoBoardDetailContent() {
   }, [searchParams]);
 
   return (
-    <div className="bg-[#ff8a8a] rounded-md w-full">
+    <div className="bg-[#ffdada] rounded-md w-full h-full">
       {contentData.map(
         (content) =>
           content.index === selectedIndex && (
-            <div key={content.index} className="w-full p-8">
+            <div key={content.index} className="w-full h-full p-8">
               {content.content}
             </div>
           )
