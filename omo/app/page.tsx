@@ -146,30 +146,33 @@ const OptimizedHomeComponent = () => {
 
   return (
     <>
-      <div className={`min-h-screen ${isDarkMode ? "dark" : "light"}`}>
-        <OmoHeader
-          handleSwitchToggle={handleSwitchToggle}
-          conceptName="블로그"
-          isRandomEnabled={isRandomEnabled}
-          isDarkMode={isDarkMode}
-          toggleTheme={toggleTheme}
-        />
-        <main className="absolute top-16 flex-grow w-full h-full overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentIndex}
-              initial="initial"
-              animate="in"
-              exit="out"
-              variants={pageVariants}
-              transition={pageTransition}
-              className="w-full h-full"
-            >
-              <CurrentComponent />
-            </motion.div>
-          </AnimatePresence>
-        </main>
-      </div>
+      <OmoHeader
+        handleSwitchToggle={handleSwitchToggle}
+        conceptName="블로그"
+        isRandomEnabled={isRandomEnabled}
+        isDarkMode={isDarkMode}
+        toggleTheme={toggleTheme}
+      />
+
+      <main
+        className={`min-h-screen flex-grow w-full h-full overflow-y-scroll scrollbar-none ${
+          isDarkMode ? "dark" : "light"
+        }`}
+      >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial="initial"
+            animate="in"
+            exit="out"
+            variants={pageVariants}
+            transition={pageTransition}
+            className="w-full h-full"
+          >
+            <CurrentComponent />
+          </motion.div>
+        </AnimatePresence>
+      </main>
     </>
   );
 };

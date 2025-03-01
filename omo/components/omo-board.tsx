@@ -4,13 +4,13 @@ import omoArrow from "@/public/omo-arrow.svg";
 import omoArrowWhite from "@/public/arrow-white.svg";
 import omoSearch from "@/public/omo-search.svg";
 import { useRouter } from "next/navigation";
+import { Book, BookAIcon, BookHeart } from "lucide-react";
+import { omoState } from "@/lib/state/omo-state";
 
 interface omoTitle {
+  index?: string;
   title: string;
-}
-
-interface omoContent {
-  content: string;
+  contents: string;
 }
 
 interface OmoBoardProps {
@@ -24,38 +24,15 @@ export function OmoBoard(overFlow: OmoBoardProps) {
   const boardRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
-  // TODO : 더미 데이터를 생성
-
-  const dummy = [
-    {
-      title: "안녕하세요",
-    },
-    {
-      title: "반갑습니다",
-    },
-    {
-      title: "props를 통해 컴포넌트에게 값 전달하기",
-    },
-    {
-      title: "react hook을 잘 사용하는법",
-    },
-    {
-      title: "nextjs next/router 사용법",
-    },
-    {
-      title: "redux를 사용하는 이유",
-    },
-  ];
-
   // useEffect에서 초기 데이터 설정 시 원본 데이터도 저장
   useEffect(() => {
-    setOriginalData(dummy);
-    setTitleData(dummy);
+    setOriginalData(omoState.omoDummyData);
+    setTitleData(omoState.omoDummyData);
   }, []);
 
   useEffect(() => {
     if (overFlow.overFlow) {
-      if (boardRef.current) boardRef.current.style.display = "flex";
+      if (boardRef.current) boardRef.current.style.display = "block";
     } else {
       if (boardRef.current) boardRef.current.style.display = "none";
     }
@@ -87,46 +64,63 @@ export function OmoBoard(overFlow: OmoBoardProps) {
   return (
     <>
       {overFlow && (
-        <div className="flex min-h-40 h-full w-full" ref={boardRef}>
-          <div className="w-full bg-[#e2e2e2]">
-            <div className="flex w-full items-center gap-4 bg-white p-2 border-t border-[#c0c0c0]">
-              <input
-                type="text"
-                className="w-full p-2"
-                placeholder="검색..."
-                onChange={handleSearch}
-              />
+        <div className="w-full lg:h-full md:h-full h-auto rounded-md p-4">
+          <h2 className="text-[#645555] font-bold text-xl p-2 flex items-center gap-2">
+            <BookHeart />
+            <span>OMO - 게시판</span>
+          </h2>
+          <div className="relative flex w-full items-center gap-4 p-2">
+            <input
+              type="text"
+              className="w-full p-2 border bg-transparent border-[#c0c0c0] rounded-lg focus:outline-none"
+              placeholder="검색..."
+              onChange={handleSearch}
+            />
+            <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
               <Image src={omoSearch} alt="omo search" width="20" height="20" />
             </div>
+          </div>
 
-            <ul>
-              {titledata.map((item, index) => (
-                <li
-                  key={index}
-                  className="flex gap-2 p-4 text-[#645555] hover:bg-[#645555] border-b-[0.5px] border-[#645555] hover:text-white"
-                  onMouseOver={() => setHoverIndex(index)}
-                  onMouseLeave={() => setHoverIndex(null)}
-                  onClick={() => handleItemClick(index)}
-                >
-                  <div>{item.title}</div>
-                  {hoverIndex === index ? (
-                    <Image
-                      src={omoArrowWhite}
-                      alt="omo arrow white"
-                      width="10"
-                      height="10"
-                    />
-                  ) : (
-                    <Image
-                      src={omoArrow}
-                      alt="omo arrow"
-                      width="10"
-                      height="10"
-                    />
-                  )}
-                </li>
-              ))}
-            </ul>
+          {/* 카드 형태의 그리드 레이아웃으로 변경 */}
+          <div className="grid grid-cols lg:grid-cols-4 sm:grid-cols-2 gap-4 p-2">
+            {titledata.map((item, index) => (
+              <div
+                key={index}
+                className="bg-[#ffdada] rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-all duration-300"
+                onMouseOver={() => setHoverIndex(index)}
+                onMouseLeave={() => setHoverIndex(null)}
+                onClick={() => handleItemClick(index)}
+              >
+                <div className="p-4 flex flex-col h-full">
+                  <div className="flex-grow mb-2">
+                    <h3 className="text-[#645555] font-medium">{item.title}</h3>
+                    <p>
+                      {item.contents.length > 100
+                        ? item.contents.slice(0, 100) + "..."
+                        : item.contents}
+                    </p>
+                  </div>
+                  <div className="flex justify-end">
+                    {hoverIndex === index ? (
+                      <Image
+                        src={omoArrowWhite}
+                        alt="omo arrow white"
+                        width="15"
+                        height="15"
+                        className="bg-[#645555] rounded-full p-1"
+                      />
+                    ) : (
+                      <Image
+                        src={omoArrow}
+                        alt="omo arrow"
+                        width="15"
+                        height="15"
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}

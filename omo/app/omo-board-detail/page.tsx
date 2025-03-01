@@ -2,11 +2,12 @@
 import React, { useState, useEffect } from "react";
 import { Sticker, ArrowLeft } from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { omoActions } from "@/lib/state/omo-state";
+import { omoActions, omoState } from "@/lib/state/omo-state";
 
 interface OmoContent {
   index: string;
-  content: string;
+  title: string;
+  contents: string;
 }
 
 function OmoBoardDetailContent() {
@@ -17,11 +18,7 @@ function OmoBoardDetailContent() {
 
   useEffect(() => {
     setSelectedIndex(searchParams.get("index") ?? "");
-    const contentData: OmoContent[] = Array.from({ length: 10 }, (_, i) => ({
-      index: String(i),
-      content: `내용...............+ ${i}`,
-    }));
-    setContentData(contentData);
+    setContentData(omoState.omoDummyData);
   }, [searchParams]);
 
   const handleGoBack = () => {
@@ -32,7 +29,7 @@ function OmoBoardDetailContent() {
   };
 
   return (
-    <div className="bg-[#ffdada] rounded-md w-full h-full">
+    <div className="bg-[#ffdada] w-full h-full overflow-hidden">
       <div className="p-4">
         <button
           onClick={handleGoBack}
@@ -46,8 +43,9 @@ function OmoBoardDetailContent() {
       {contentData.map(
         (content) =>
           content.index === selectedIndex && (
-            <div key={content.index} className="w-full h-full p-8">
-              {content.content}
+            <div className="w-full h-full p-8">
+              <h2>{content.title}</h2>
+              <div key={content.index}>{content.contents}</div>
             </div>
           )
       )}

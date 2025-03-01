@@ -23,7 +23,7 @@ export default function OmoSectionMain() {
   }, []);
   return (
     <>
-      <section className="bg-[#FEA1A1] w-full h-full">
+      <section className="mt-20 w-full h-full">
         <div>
           <div>
             <PostItBoard />
