@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "styled-components": "^6.1.15",
-    "valtio": "^2.1.3"
-  }
-}
