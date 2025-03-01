@@ -18,16 +18,39 @@ interface OmoBoardProps {
 }
 
 export function OmoBoard(overFlow: OmoBoardProps) {
+  const [originalData, setOriginalData] = useState<omoTitle[]>([]);
   const [titledata, setTitleData] = useState<omoTitle[]>([]);
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const boardRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
+  // TODO : 더미 데이터를 생성
+
+  const dummy = [
+    {
+      title: "안녕하세요",
+    },
+    {
+      title: "반갑습니다",
+    },
+    {
+      title: "props를 통해 컴포넌트에게 값 전달하기",
+    },
+    {
+      title: "react hook을 잘 사용하는법",
+    },
+    {
+      title: "nextjs next/router 사용법",
+    },
+    {
+      title: "redux를 사용하는 이유",
+    },
+  ];
+
+  // useEffect에서 초기 데이터 설정 시 원본 데이터도 저장
   useEffect(() => {
-    const dummyData: omoTitle[] = Array.from({ length: 10 }, (_, i) => ({
-      title: `props 를 통해 컴포넌트에게 값 전달하기.ㅁ니ㅏㄹㅇ늬람ㄴ리ㅏㅁㅇ느리ㅏㅁㄴ을미나ㅡㄹ니`,
-    }));
-    setTitleData(dummyData);
+    setOriginalData(dummy);
+    setTitleData(dummy);
   }, []);
 
   useEffect(() => {
@@ -43,16 +66,22 @@ export function OmoBoard(overFlow: OmoBoardProps) {
     // URL 파라미터로 index 전달
     router.push(`../omo-board-detail?index=${index}`);
   };
-
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value;
-    const filteredData = titledata.filter((item) =>
-      item.title.includes(searchValue)
-    );
-    setTitleData(filteredData);
-    if (!filteredData) {
-      setTitleData(titledata);
+
+    // 검색어가 비어있으면 원본 데이터 표시
+    if (!searchValue.trim()) {
+      setTitleData(originalData);
+      return;
     }
+
+    // 원본 데이터에서 필터링 (titledata가 아닌 originalData에서 검색)
+    const filteredData = originalData.filter((item) =>
+      item.title.toLowerCase().includes(searchValue.toLowerCase())
+    );
+
+    // 검색 결과 설정
+    setTitleData(filteredData);
   };
 
   return (
