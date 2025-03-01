@@ -43,7 +43,7 @@ function OmoBoardDetailContent() {
       {contentData.map(
         (content) =>
           content.index === selectedIndex && (
-            <div className="w-full h-full p-8">
+            <div className="w-full h-full p-8" key={content.index}>
               <h2>{content.title}</h2>
               <div key={content.index}>{content.contents}</div>
             </div>
