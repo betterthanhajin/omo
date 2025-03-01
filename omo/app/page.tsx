@@ -16,6 +16,9 @@ const OmoSectionSkills = dynamic(
 const OmoSectionMain = dynamic(() => import("../components/omo-section-main"));
 const OmoKitsch = dynamic(() => import("@/components/omo-kitsch"));
 const OmoRoadMap = dynamic(() => import("@/components/omo-roadmap"));
+const StarBackground = dynamic(
+  () => import("@/components/omo-star-background")
+);
 
 const components = [
   OmoRetro,
@@ -25,9 +28,10 @@ const components = [
   OmoSectionMain,
   OmoKitsch,
   OmoRoadMap,
+  StarBackground,
 ];
 // * , "main", "kitsch" , "skills", "main"
-const concepts = ["omo - 01", "omo - 02", "omo - 03", "omo - 04"];
+const concepts = ["omo - 01", "omo - 02", "omo - 03", "omo - 04", "omo - 05"];
 
 const pageVariants = {
   initial: { opacity: 0, x: "-100%" },
@@ -107,29 +111,65 @@ const OptimizedHomeComponent = () => {
     };
   }, [isMobile, handleSwipe]);
 
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // 테마 전환 핸들러
+  const toggleTheme = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
+
+  // 테마 변경 시 body 스타일 업데이트
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add("dark-mode");
+      document.body.style.backgroundColor = "#111827";
+      document.body.style.color = "#e5e7eb";
+    } else {
+      document.body.classList.remove("dark-mode");
+      document.body.style.backgroundColor = "#ffffff";
+      document.body.style.color = "#1f2937";
+    }
+  }, [isDarkMode]);
+
+  // 로컬 스토리지에서 테마 설정 불러오기
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme === "dark") {
+      setIsDarkMode(true);
+    }
+  }, []);
+
+  // 테마 설정 저장하기
+  useEffect(() => {
+    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+  }, [isDarkMode]);
+
   return (
     <>
-      {" "}
-      <OmoHeader
-        handleSwitchToggle={handleSwitchToggle}
-        conceptName={concepts[currentIndex]}
-        isRandomEnabled={isRandomEnabled}
-      />
-      <main className="absolute top-16 flex-grow w-full h-full overflow-hidden">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentIndex}
-            initial="initial"
-            animate="in"
-            exit="out"
-            variants={pageVariants}
-            transition={pageTransition}
-            className="w-full h-full"
-          >
-            <CurrentComponent />
-          </motion.div>
-        </AnimatePresence>
-      </main>
+      <div className={`min-h-screen ${isDarkMode ? "dark" : "light"}`}>
+        <OmoHeader
+          handleSwitchToggle={handleSwitchToggle}
+          conceptName="블로그"
+          isRandomEnabled={isRandomEnabled}
+          isDarkMode={isDarkMode}
+          toggleTheme={toggleTheme}
+        />
+        <main className="absolute top-16 flex-grow w-full h-full overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial="initial"
+              animate="in"
+              exit="out"
+              variants={pageVariants}
+              transition={pageTransition}
+              className="w-full h-full"
+            >
+              <CurrentComponent />
+            </motion.div>
+          </AnimatePresence>
+        </main>
+      </div>
     </>
   );
 };

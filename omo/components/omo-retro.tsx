@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { OmoBoard } from "./omo-board";
+import { omoState } from "@/lib/state/omo-state";
 
 export default function OmoRetro() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -8,7 +9,7 @@ export default function OmoRetro() {
 
   return (
     <>
-      {!isHovered ? (
+      {!isHovered && omoState.showThemeRandering ? (
         <div
           className="relative h-full bg-gradient-to-br bg-pink-400 overflow-x-hidden"
           style={{

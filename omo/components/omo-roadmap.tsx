@@ -1,5 +1,4 @@
-import { circle } from "framer-motion/client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useRef } from "react";
 
 const SkillsRoadmap = () => {
   const circleRef = useRef<HTMLDivElement>(null);
