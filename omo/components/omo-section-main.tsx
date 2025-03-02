@@ -23,11 +23,10 @@ export default function OmoSectionMain() {
   }, []);
   return (
     <>
-      <section className="mt-20 w-full h-full">
+      <section className="mt-20 w-full h-full bg-[#d5f1e7] overflow-y-scroll scrollbar-none">
         <div>
-          <div>
-            <PostItBoard />
-            <div
+          <PostItBoard />
+          {/* <div
               className={
                 isSquareExpanded
                   ? "w-full h-screen bg-[#EFEFEF] p-4 m-0"
@@ -59,7 +58,7 @@ export default function OmoSectionMain() {
                 : "hidden -translate-x-0 w-[360px] h-[360px] rounded-full bg-gray-300"
             }
             style={{ transition: "all 0.5s ease" }}
-          ></div>
+          ></div> */}
         </div>
       </section>
     </>

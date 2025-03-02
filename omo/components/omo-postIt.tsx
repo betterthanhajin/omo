@@ -40,7 +40,7 @@ const PostIt = ({
         dragControls={controls}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="w-48 h-48 bg-yellow-300 p-4 m-2 shadow-md rounded-sm cursor-move transform rotate-1"
+        className="h-48 bg-yellow-300 p-4 m-2 shadow-md rounded-sm cursor-move transform rotate-1"
         style={{
           boxShadow: "2px 2px 5px rgba(0,0,0,0.1)",
           background: "linear-gradient(135deg, #fff9c4 0%, #fff59d 100%)",

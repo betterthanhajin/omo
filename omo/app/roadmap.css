@@ -216,7 +216,7 @@ section.active .imageWrap span {
 
 .rotateCircle {
   padding: 110px 150px;
-  background-color: #dcaa71;
+  background-color: #d980fa;
   border-radius: 40%;
   animation: rotateAni 10s ease infinite;
   transition: left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -620,62 +620,47 @@ h1 {
   left: 0;
   width: 180px;
   height: 180px;
-  background-color: rgb(242, 132, 105);
+  background-color: pink;
   border-radius: 50%;
   /* opacity: 0.5; */
 }
 
 #circle1 {
-  position: absolute;
-  top: 0;
-  right: 0;
   width: 150px;
   height: 150px;
-  background-color: rgb(134, 225, 138);
+  background-color: #ff6b6b;
   border-radius: 50%;
   /* opacity: 0.5; */
 }
 
 #circle2 {
-  position: absolute;
-  top: 50%;
-  left: 15%;
   width: 80px;
   height: 80px;
-  background-color: rgb(81, 239, 194);
+  background-color: #4ecdc4;
   border-radius: 50%;
   /* opacity: 0.5; */
 }
 
 #circle3 {
-  position: absolute;
-  bottom: 0;
-  left: 0;
   width: 60px;
   height: 60px;
-  background-color: rgb(249, 255, 77);
+  background-color: #45b7d1;
   border-radius: 50%;
   /* opacity: 0.5; */
 }
 
 #circle4 {
-  position: absolute;
-  bottom: 20%;
-  right: 40%;
   width: 200px;
   height: 200px;
-  background-color: rgb(238, 139, 238);
+  background-color: #fdcb6e;
   border-radius: 50%;
   /* opacity: 0.5; */
 }
 
 #circle5 {
-  position: absolute;
-  bottom: 50%;
-  left: 10%;
   width: 90px;
   height: 90px;
-  background-color: rgb(98, 174, 249);
+  background-color: #6c5ce7;
   border-radius: 50%;
   /* opacity: 0.5; */
 }
@@ -686,7 +671,7 @@ h1 {
   left: 60%;
   width: 50px;
   height: 50px;
-  background-color: rgb(186, 122, 255);
+  background-color: #e84393;
   border-radius: 50%;
   /* opacity: 0.5; */
 }
@@ -697,7 +682,7 @@ h1 {
   right: 10%;
   width: 110px;
   height: 110px;
-  background-color: rgb(241, 124, 104);
+  background-color: #74b9ff;
   border-radius: 50%;
   /* opacity: 0.5; */
 }
@@ -708,7 +693,7 @@ h1 {
   left: 0;
   width: 180px;
   height: 180px;
-  background-color: rgb(242, 132, 105);
+  background-color: #ffa502;
   border-radius: 50%;
   /* opacity: 0.5; */
 }
@@ -719,7 +704,7 @@ h1 {
   right: 0;
   width: 150px;
   height: 150px;
-  background-color: rgb(134, 225, 138);
+  background-color: #d980fa;
   border-radius: 50%;
   /* opacity: 0.5; */
 }
@@ -730,7 +715,7 @@ h1 {
   left: 15%;
   width: 80px;
   height: 80px;
-  background-color: rgb(81, 239, 194);
+  background-color: #ff6b6b;
   border-radius: 50%;
   /* opacity: 0.5; */
 }
@@ -741,7 +726,7 @@ h1 {
   left: 0;
   width: 60px;
   height: 60px;
-  background-color: rgb(249, 255, 77);
+  background-color: #4ecdc4;
   border-radius: 50%;
   /* opacity: 0.5; */
 }
@@ -752,7 +737,7 @@ h1 {
   right: 40%;
   width: 200px;
   height: 200px;
-  background-color: rgb(238, 139, 238);
+  background-color: #fdcb6e;
   border-radius: 50%;
   /* opacity: 0.5; */
 }
@@ -763,7 +748,7 @@ h1 {
   left: 10%;
   width: 90px;
   height: 90px;
-  background-color: rgb(98, 174, 249);
+  background-color: #6c5ce7;
   border-radius: 50%;
   /* opacity: 0.5; */
 }
@@ -774,7 +759,7 @@ h1 {
   left: 60%;
   width: 50px;
   height: 50px;
-  background-color: rgb(186, 122, 255);
+  background-color: #e84393;
   border-radius: 50%;
   /* opacity: 0.5; */
 }
@@ -785,7 +770,7 @@ h1 {
   right: 10%;
   width: 110px;
   height: 110px;
-  background-color: rgb(241, 124, 104);
+  background-color: #74b9ff;
   border-radius: 50%;
   /* opacity: 0.5; */
 }
@@ -813,11 +798,11 @@ h1 {
   font-size: 20px;
 }
 
-#circle0:hover {
+/* #circle0:hover {
   width: 120px;
   height: 120px;
   transition: 0.3s;
-}
+} */
 
 #circle1:hover {
   width: 120px;
