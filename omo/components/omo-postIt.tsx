@@ -83,6 +83,8 @@ const PostItBoard = () => {
     { id: "postit-4", content: "네 번째 메모" },
     { id: "postit-5", content: "다섯번째 메모" },
     { id: "postit-6", content: "여섯번째 메모" },
+    { id: "postit-7", content: "일곱번째 메모" },
+    { id: "postit-8", content: "여덟번째 메모" },
   ]);
 
   const [post, setPost] = useState<PostData[]>([]);
