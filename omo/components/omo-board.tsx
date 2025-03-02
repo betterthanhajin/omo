@@ -64,7 +64,7 @@ export function OmoBoard(overFlow: OmoBoardProps) {
   return (
     <>
       {overFlow && (
-        <div className="w-full lg:h-full md:h-full h-auto rounded-md p-4">
+        <div className="w-full lg:h-full md:h-full h-auto rounded-md p-4 mt-14">
           <h2 className="text-[#645555] font-bold text-xl p-2 flex items-center gap-2">
             <BookHeart />
             <span>OMO - 게시판</span>

@@ -426,7 +426,7 @@ input[id="trigger"]:checked + label span:nth-child(3) {
 }
 
 /* 사이드바 */
-.sidebar {
+/* .sidebar {
   width: 1920px;
   height: 300vh;
   background-color: pink;
@@ -440,7 +440,7 @@ input[id="trigger"]:checked + label span:nth-child(3) {
 
 .sidebarPoint {
   justify-content: left;
-}
+} */
 
 .til {
   justify-content: right;

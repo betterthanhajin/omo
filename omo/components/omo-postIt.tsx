@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { useDragControls } from "framer-motion";
 
 interface PostData {
   id: string;
@@ -13,19 +12,17 @@ const PostIt = ({
   id,
   content,
   updateContent,
-  onDragEnd,
 }: {
   id: string;
   content: string;
   updateContent: (id: string, newContent: string) => void;
-  onDragEnd: (event: React.DragEvent<HTMLElement>) => void;
 }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(content);
-  const controls = useDragControls();
 
-  const handleDoubleClick = () => {
+  const handleClick = () => {
     setIsEditing(true);
+    setText("");
   };
 
   const handleBlur = () => {
@@ -36,8 +33,6 @@ const PostIt = ({
   return (
     <>
       <motion.div
-        drag
-        dragControls={controls}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="h-48 bg-yellow-300 p-4 m-2 shadow-md rounded-sm cursor-move transform rotate-1"
@@ -45,7 +40,7 @@ const PostIt = ({
           boxShadow: "2px 2px 5px rgba(0,0,0,0.1)",
           background: "linear-gradient(135deg, #fff9c4 0%, #fff59d 100%)",
         }}
-        onDoubleClick={handleDoubleClick}
+        onClick={handleClick}
       >
         {isEditing ? (
           <textarea
@@ -96,17 +91,6 @@ const PostItBoard = () => {
     );
   };
 
-  const handleDragEnd = (event: React.DragEvent<HTMLElement>) => {
-    const { clientX: x, clientY: y } = event;
-    const id = event.currentTarget.id;
-    // 기존 로직을 여기에 추가하세요
-    setPost((prevPost) =>
-      prevPost.map((post) =>
-        post.id === id ? { ...post, position: { x, y } } : post
-      )
-    );
-  };
-
   return (
     <div className="grid grid-cols lg:grid-cols-4 sm:grid-cols-2 gap-4 p-4">
       {postIts.map((postIt) => (
@@ -115,7 +99,6 @@ const PostItBoard = () => {
           id={postIt.id}
           content={postIt.content}
           updateContent={updateContent}
-          onDragEnd={handleDragEnd}
         />
       ))}
     </div>

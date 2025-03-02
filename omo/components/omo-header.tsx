@@ -3,6 +3,9 @@ import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import omoLogo from "@/public/omo-logo.png";
 import Link from "next/link";
+import { MenuIcon } from "lucide-react";
+import { useMobileSizeCheck } from "@/lib/hook/use-mobile-size-check";
+import { OmoSidebar } from "@/components/omo-sidebar"; // 사이드바 컴포넌트 임포트
 
 export function OmoHeader({
   handleSwitchToggle,
@@ -18,8 +21,10 @@ export function OmoHeader({
   toggleTheme: () => void;
 }) {
   const [currentDate, setCurrentDate] = useState("");
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLSpanElement>(null);
+  const isMobile = useMobileSizeCheck();
 
   useEffect(() => {
     setCurrentDate(new Date().toLocaleDateString());
@@ -32,6 +37,11 @@ export function OmoHeader({
       );
     }
   }, []);
+
+  // 사이드바 토글 함수
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
 
   // 테마에 따른 색상 설정
   const themeStyles = {
@@ -69,8 +79,19 @@ export function OmoHeader({
           background-color: ${isDarkMode ? "#374151" : "#e5e7eb"};
         }
       `}</style>
+
+      {/* 사이드바 컴포넌트 */}
+      {isSidebarOpen && (
+        <OmoSidebar
+          isOpen={isSidebarOpen}
+          onClose={() => setSidebarOpen(false)}
+          isDarkMode={isDarkMode}
+        />
+      )}
+
       <header
-        className={`fixed top-0 left-0 right-0 z-50 flex justify-center h-[60px] sm:gap-12 gap-0 items-center p-2 sm:px-6 w-full transition-colors duration-300`}
+        className={`fixed top-0 left-0 right-0 z-50 flex justify-between
+         h-[60px] gap2 items-center p-2 w-full transition-colors duration-300 border-b`}
         style={{
           backgroundColor: themeStyles.backgroundColor,
           color: themeStyles.textColor,
@@ -78,16 +99,23 @@ export function OmoHeader({
         ref={headerRef}
       >
         <div className="flex items-center sm:gap-2">
-          <Link href="/">
-            <Image src={omoLogo} alt="omo logo" width="60" height="60" />
-          </Link>
+          <MenuIcon
+            onClick={() => {
+              console.log("menu icon clicked");
+              toggleSidebar();
+            }}
+            className="cursor-pointer"
+          />
         </div>
         <div className="text-center flex items-center">
+          <Link href="/">
+            <Image src={omoLogo} alt="omo logo" width="30" height="30" />
+          </Link>
           <span
-            className="ml-2 mr-2 font-bold text-[1rem] sm:text-xl transition-colors duration-300"
+            className="ml-2 mr-2 font-bold text-md sm:text-xl transition-colors duration-300"
             style={{ color: themeStyles.textColor }}
           >
-            오모시로이 블로그
+            {isMobile ? "오모시로이" : "오모시로이 블로그"}
           </span>
         </div>
 
