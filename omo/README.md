@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# OMO - 재미있는 기술 블로그 경험
 
-## Getting Started
+![OMO Logo](link-to-your-logo.png)
 
-First, run the development server:
+OMO는 "기술 블로그가 재미있으면 좋겠다"라는 아이디어에서 시작된 프로젝트입니다. 6가지 독특한 컨셉을 통해 사용자와 상호작용하며 풍부한 UX 경험을 제공하는 개인 기술 블로그 플랫폼입니다.
+
+## 🌈 6가지 컨셉
+
+OMO는 다음 6가지 컨셉을 통해 사용자에게 다채로운 경험을 선사합니다:
+
+1. 🎨 **키치**: 화려하고 독특한 디자인으로 시선을 사로잡습니다.
+2. 🏢 **모던**: 세련되고 미니멀한 디자인으로 깔끔한 사용자 경험을 제공합니다.
+3. 📺 **레트로**: nostalgic한 분위기로 과거의 감성을 불러일으킵니다.
+4. 🎨 **수채화**: 부드럽고 예술적인 터치로 감성적인 경험을 선사합니다.
+5. 🌊 **바다**: 시원하고 청량한 느낌의 디자인으로 마음을 편안하게 합니다.
+6. ☁️ **하늘**: 밝고 경쾌한 분위기로 사용자의 기분을 좋게 만듭니다.
+
+## 🚀 주요 특징
+
+- **Interactive UI**: 사용자의 선택에 따라 실시간으로 변화하는 인터페이스
+- **Responsive Design**: 모든 디바이스에서 최적화된 사용자 경험
+- **Rich Content**: 기술 관련 글, 코드 스니펫, 튜토리얼 등 다양한 컨텐츠 제공
+- **Theme Switching**: 6가지 컨셉 간 자유로운 전환 기능
+
+## 🛠 기술 스택
+
+- Frontend: [react,nextJS]
+- Backend: [사용된 백엔드 기술들]
+- Database: [사용된 데이터베이스]
+- Deployment: [배포 플랫폼]
+
+## 🖥 설치 및 실행
 
 ```bash
+git clone https://github.com/betterthanhajin/omo.git
+cd omo
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🤝 기여하기
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+OMO 프로젝트에 기여하고 싶으시다면 언제든 Pull Request를 보내주세요. 새로운 아이디어, 버그 리포트, 개선 사항 등 모든 종류의 기여를 환영합니다!
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 📝 라이선스
 
-## Learn More
+이 프로젝트는 [라이선스 이름] 라이선스 하에 있습니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참조하세요.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+OMO와 함께 기술 블로그의 새로운 경험을 즐겨보세요! 🎉✨

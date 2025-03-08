@@ -57,6 +57,18 @@ export default function Page() {
     setIsDarkMode((prevMode) => !prevMode);
   };
 
+  const pageVariants = {
+    initial: { opacity: 0, x: "-100%" },
+    in: { opacity: 1, x: 0 },
+    out: { opacity: 0, x: "100%" },
+  };
+
+  const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: 0.5,
+  };
+
   return (
     <>
       <OmoHeader
@@ -66,7 +78,25 @@ export default function Page() {
         isDarkMode={isDarkMode}
         toggleTheme={toggleTheme}
       />
-      <OmoPostIt />
+      <main
+        className={`min-h-screen flex-grow w-full h-full overflow-y-scroll scrollbar-none ${
+          isDarkMode ? "dark" : "light"
+        }`}
+      >
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial="initial"
+            animate="in"
+            exit="out"
+            variants={pageVariants}
+            transition={pageTransition}
+            className="w-full h-full"
+          >
+            <CurrentComponent />
+          </motion.div>
+        </AnimatePresence>
+      </main>
     </>
   );
 }
