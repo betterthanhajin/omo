@@ -30,16 +30,7 @@ export default function Page() {
     () => import("@/components/omo-star-background")
   );
 
-  const components = [
-    OmoRetro,
-    // OmoWaterColor,
-    // OmoModern,
-    // OmoSectionSkills,
-    OmoSectionMain,
-    OmoKitsch,
-    OmoRoadMap,
-    StarBackground,
-  ];
+  const components = [OmoSectionMain, OmoKitsch, OmoRoadMap, StarBackground];
   let newIndex = 0;
   const CurrentComponent = useMemo(
     () => components[currentIndex],
