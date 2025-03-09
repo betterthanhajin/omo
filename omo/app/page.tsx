@@ -24,9 +24,6 @@ const OmoGuestbook = dynamic(() => import("@/components/omo-guest-book"));
 
 const components = [
   OmoRetro,
-  // OmoWaterColor,
-  // OmoModern,
-  // OmoSectionSkills,
   OmoGuestbook,
   OmoKitsch,
   OmoRoadMap,
@@ -77,7 +74,7 @@ const OptimizedHomeComponent = () => {
     if (isDarkMode) {
       document.body.classList.add("dark-mode");
       document.body.style.backgroundColor = "#111827";
-      document.body.style.color = "#e5e7eb";
+      document.body.style.color = "black";
     } else {
       document.body.classList.remove("dark-mode");
       document.body.style.backgroundColor = "#ffffff";
