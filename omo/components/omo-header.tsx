@@ -6,7 +6,7 @@ import Link from "next/link";
 import { MenuIcon } from "lucide-react";
 import { useMobileSizeCheck } from "@/lib/hook/use-mobile-size-check";
 import { OmoSidebar } from "@/components/omo-sidebar"; // 사이드바 컴포넌트 임포트
-
+import { useAutoThemeSwitching } from "@/lib/hook/use-auto-theme";
 export function OmoHeader({
   handleSwitchToggle,
   conceptName,
@@ -25,6 +25,14 @@ export function OmoHeader({
   const headerRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLSpanElement>(null);
   const isMobile = useMobileSizeCheck();
+  const [currentTheme, setCurrentTheme] = useState("retro");
+  const {
+    autoSwitchEnabled,
+    currentMode,
+    currentInfo,
+    toggleAutoSwitch,
+    changeMode,
+  } = useAutoThemeSwitching(false, "time", setCurrentTheme);
 
   useEffect(() => {
     setCurrentDate(new Date().toLocaleDateString());
@@ -180,6 +188,59 @@ export function OmoHeader({
               ></span>
             </label>
           </div>
+          <>
+            <div className="text-xs">
+              <div>
+                <div className="flex gap-2">
+                  <label className="flex items-center gap-1">
+                    <input
+                      type="radio"
+                      value="time"
+                      checked={currentMode === "time"}
+                      onChange={() => changeMode("time")}
+                    />
+                    <span>시간대별</span>
+                  </label>
+                  <label className="flex items-center gap-1">
+                    <input
+                      type="radio"
+                      value="weather"
+                      checked={currentMode === "weather"}
+                      onChange={() => changeMode("weather")}
+                    />
+                    <span>날씨별</span>
+                  </label>
+                  <label className="flex items-center gap-1">
+                    <input
+                      type="radio"
+                      value="season"
+                      checked={currentMode === "season"}
+                      onChange={() => changeMode("season")}
+                    />
+                    <span>계절별</span>
+                  </label>
+                </div>
+
+                {currentInfo && (
+                  <div>
+                    {currentMode === "time" && (
+                      <p>현재 시간대: {currentInfo.period}</p>
+                    )}
+                    {currentMode === "weather" && (
+                      <p>
+                        현재 날씨: {currentInfo.condition}, 온도:{" "}
+                        {currentInfo.temp}
+                        °C
+                      </p>
+                    )}
+                    {currentMode === "season" && (
+                      <p>현재 계절: {currentInfo.season}</p>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </>
         </div>
       </header>
     </>

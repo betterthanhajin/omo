@@ -26,39 +26,6 @@ export default function OmoSectionMain() {
       <section className="mt-20 w-full h-full bg-[#d5f1e7] overflow-y-scroll scrollbar-none">
         <div>
           <PostItBoard />
-          {/* <div
-              className={
-                isSquareExpanded
-                  ? "w-full h-screen bg-[#EFEFEF] p-4 m-0"
-                  : "w-[360px] h-[280px] bg-[#EFEFEF] p-4 m-0"
-              }
-              style={{ transition: "all 3s ease-in-out" }}
-            >
-              <h2 className="text-5xl text-[#645555]">
-                omoshiroi
-                <br />
-                my-tech
-                <br />
-                blog
-              </h2>
-            </div>
-            <div
-              className={
-                isSquareExpanded
-                  ? "hidden"
-                  : "block w-28 h-28 rounded-full bg-gray-200"
-              }
-            ></div>
-          </div>
-
-          <div
-            className={
-              isCircleMoving
-                ? "block translate-x-96 w-[360px] h-[360px] rounded-full bg-gray-300"
-                : "hidden -translate-x-0 w-[360px] h-[360px] rounded-full bg-gray-300"
-            }
-            style={{ transition: "all 0.5s ease" }}
-          ></div> */}
         </div>
       </section>
     </>

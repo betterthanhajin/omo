@@ -20,12 +20,14 @@ const StarBackground = dynamic(
   () => import("@/components/omo-star-background")
 );
 
+const OmoGuestbook = dynamic(() => import("@/components/omo-guest-book"));
+
 const components = [
   OmoRetro,
   // OmoWaterColor,
   // OmoModern,
   // OmoSectionSkills,
-  OmoSectionMain,
+  OmoGuestbook,
   OmoKitsch,
   OmoRoadMap,
   StarBackground,
@@ -54,6 +56,7 @@ const OptimizedHomeComponent = () => {
     () => components[currentIndex],
     [currentIndex]
   );
+
   let newIndex = 0;
   const handleSwitchToggle = useCallback((isEnabled: boolean) => {
     setIsRandomEnabled(isEnabled);
@@ -61,55 +64,6 @@ const OptimizedHomeComponent = () => {
       setCurrentIndex((prev) => (prev + 1) % components.length);
     }
   }, []);
-
-  // const handleSwipe = useCallback(
-  //   (direction: string) => {
-  //     if (isRandomEnabled) {
-  //       const newIndex = Math.floor(Math.random() * components.length);
-  //       setCurrentIndex(newIndex);
-  //     } else {
-  //       if (direction === "left") {
-  //         setCurrentIndex((prevIndex) => (prevIndex + 1) % components.length);
-  //       } else if (direction === "right") {
-  //         setCurrentIndex(
-  //           (prevIndex) =>
-  //             (prevIndex - 1 + components.length) % components.length
-  //         );
-  //       }
-  //     }
-  //   },
-  //   [isRandomEnabled]
-  // );
-
-  // useEffect(() => {
-  //   let touchStartX = 0;
-  //   let touchEndX = 0;
-
-  //   const handleTouchStart = (e: TouchEvent) => {
-  //     touchStartX = e.touches[0].clientX;
-  //   };
-
-  //   const handleTouchEnd = (e: TouchEvent) => {
-  //     touchEndX = e.changedTouches[0].clientX;
-  //     if (touchStartX - touchEndX > 50) {
-  //       handleSwipe("left");
-  //     } else if (touchEndX - touchStartX > 50) {
-  //       handleSwipe("right");
-  //     }
-  //   };
-
-  //   if (isMobile) {
-  //     window.addEventListener("touchstart", handleTouchStart);
-  //     window.addEventListener("touchend", handleTouchEnd);
-  //   }
-
-  //   return () => {
-  //     if (isMobile) {
-  //       window.removeEventListener("touchstart", handleTouchStart);
-  //       window.removeEventListener("touchend", handleTouchEnd);
-  //     }
-  //   };
-  // }, [isMobile, handleSwipe]);
 
   const [isDarkMode, setIsDarkMode] = useState(false);
 
