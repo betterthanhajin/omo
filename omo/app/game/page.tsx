@@ -26,7 +26,7 @@ export default function Page() {
     () => import("@/components/omo-star-background")
   );
 
-  const components = [OmoRetro];
+  const components = [OmoKitsch];
   let newIndex = 0;
   const CurrentComponent = useMemo(
     () => components[currentIndex],

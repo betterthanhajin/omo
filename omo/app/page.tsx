@@ -8,12 +8,6 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // Dynamic imports for code splitting
 const OmoRetro = dynamic(() => import("../components/omo-retro"));
-const OmoWaterColor = dynamic(() => import("../components/omo-water-color"));
-const OmoModern = dynamic(() => import("../components/omo-modern"));
-const OmoSectionSkills = dynamic(
-  () => import("../components/omo-section-skills")
-);
-const OmoSectionMain = dynamic(() => import("../components/omo-section-main"));
 const OmoKitsch = dynamic(() => import("@/components/omo-kitsch"));
 const OmoRoadMap = dynamic(() => import("@/components/omo-roadmap"));
 const StarBackground = dynamic(

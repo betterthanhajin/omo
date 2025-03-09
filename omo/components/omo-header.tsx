@@ -116,15 +116,16 @@ export function OmoHeader({
           />
         </div>
         <div className="text-center flex items-center">
-          <Link href="/">
+          <Link href="/" className="flex items-center gap-2">
             <Image src={omoLogo} alt="omo logo" width="30" height="30" />
+
+            <span
+              className="ml-2 mr-2 font-bold text-md sm:text-xl transition-colors duration-300"
+              style={{ color: themeStyles.textColor }}
+            >
+              {isMobile ? "오모시로이" : "오모시로이 블로그"}
+            </span>
           </Link>
-          <span
-            className="ml-2 mr-2 font-bold text-md sm:text-xl transition-colors duration-300"
-            style={{ color: themeStyles.textColor }}
-          >
-            {isMobile ? "오모시로이" : "오모시로이 블로그"}
-          </span>
         </div>
 
         {/* 스위치들을 가로로 배치 */}
