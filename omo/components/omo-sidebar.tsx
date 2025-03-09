@@ -93,7 +93,7 @@ export function OmoSidebar({
           omo-game
         </Link>
         <Link
-          href="/roadmap"
+          href="/road-map"
           className="sidebar-item block p-2"
           onClick={onClose}
         >
