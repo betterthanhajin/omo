@@ -188,7 +188,7 @@ export function OmoHeader({
               ></span>
             </label>
           </div>
-          <>
+          {/* <>
             <div className="text-xs">
               <div>
                 <div className="flex gap-2">
@@ -240,7 +240,7 @@ export function OmoHeader({
                 )}
               </div>
             </div>
-          </>
+          </> */}
         </div>
       </header>
     </>
