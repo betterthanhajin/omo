@@ -694,7 +694,7 @@ const SkillsRoadmap = () => {
       ref={containerRef}
     >
       {/* Top control panel */}
-      <div className="w-full flex justify-center gap-4 mb-6 p-4 bg-white dark:bg-gray-800 shadow-md rounded-lg mx-auto max-w-4xl">
+      <div className="w-full flex justify-center gap-4 mb-6 p-4 bg-white dark:bg-gray-800 shadow-md rounded-lg mx-auto">
         <button
           className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             displayMode === "default"
@@ -807,7 +807,7 @@ const SkillsRoadmap = () => {
         <section className="flex flex-col md:flex-row">
           {/* Left container */}
           <div
-            className="relative w-full md:w-1/2 h-[400px] md:h-[600px] border-r border-gray-200 dark:border-gray-700"
+            className="relative w-full md:w-1/2 h-[400px] md:h-[600px]"
             ref={leftContainerRef}
             onMouseOver={handleLeftContainerMouseOver}
             onMouseOut={handleLeftContainerMouseOut}
@@ -904,7 +904,7 @@ const SkillsRoadmap = () => {
             {selectedSkill.description}
           </p>
           <button
-            className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 bg-gray-100 dark:bg-gray-700 rounded-full w-6 h-6 flex items-center justify-center"
+            className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 dark:text-white dark:hover:text-gray-200 bg-gray-100 dark:bg-gray-700 rounded-full w-6 h-6 flex items-center justify-center"
             onClick={() => {
               setShowTooltip(false);
               setSelectedSkill(null);
@@ -937,7 +937,7 @@ const SkillsRoadmap = () => {
         {frontendSkills.concat(backendSkills).map((skill, i) => (
           <li key={i}>
             <button
-              className="px-4 py-2 text-sm rounded-full bg-white hover:bg-gray-50 shadow-sm border border-gray-200 transition-colors dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
+              className="px-4 py-2 text-sm rounded-full bg-white hover:bg-gray-50 shadow-sm border border-gray-200 transition-colors dark:bg-gray-800 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700"
               onClick={() => scrollToSection(i)}
             >
               {skill}
