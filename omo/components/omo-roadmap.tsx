@@ -755,14 +755,14 @@ const SkillsRoadmap = () => {
               className="w-4 h-4 rounded-full mr-2"
               style={{ backgroundColor: modernColors[0] }}
             ></div>
-            <span className="text-sm font-medium">Frontend</span>
+            <span className="text-sm font-medium text-white">Frontend</span>
           </div>
           <div className="flex items-center bg-white dark:bg-gray-800 px-4 py-2 rounded-md shadow-sm">
             <div
               className="w-4 h-4 rounded-full mr-2"
               style={{ backgroundColor: modernColors[1] }}
             ></div>
-            <span className="text-sm font-medium">Backend</span>
+            <span className="text-sm font-medium text-white">Backend</span>
           </div>
         </div>
       )}
