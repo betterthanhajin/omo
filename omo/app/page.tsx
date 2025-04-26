@@ -5,26 +5,7 @@ import { OmoHeader } from "@/components/omo-header";
 import { OmoFooter } from "@/components/omo-footer";
 import { useMediaQuery } from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
-
-// Dynamic imports for code splitting
-const OmoRetro = dynamic(() => import("../components/omo-retro"));
-const OmoKitsch = dynamic(() => import("@/components/omo-kitsch"));
-const OmoRoadMap = dynamic(() => import("@/components/omo-roadmap"));
-const StarBackground = dynamic(
-  () => import("@/components/omo-star-background")
-);
-
-const OmoGuestbook = dynamic(() => import("@/components/omo-guest-book"));
-
-const components = [
-  OmoRetro,
-  OmoGuestbook,
-  OmoKitsch,
-  OmoRoadMap,
-  StarBackground,
-];
-// * , "main", "kitsch" , "skills", "main"
-const concepts = ["omo - 01", "omo - 02", "omo - 03", "omo - 04", "omo - 05"];
+import { omoState } from "@/lib/state/omo-state";
 
 const pageVariants = {
   initial: { opacity: 0, x: "-100%" },
@@ -44,7 +25,7 @@ const OptimizedHomeComponent = () => {
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
   const CurrentComponent = useMemo(
-    () => components[currentIndex],
+    () => omoState.currentComponents[currentIndex],
     [currentIndex]
   );
 
@@ -53,7 +34,7 @@ const OptimizedHomeComponent = () => {
     console.log("isEnabled", isEnabled);
     setIsRandomEnabled(isEnabled);
     if (isEnabled) {
-      setCurrentIndex((prev) => (prev + 1) % components.length);
+      setCurrentIndex((prev) => (prev + 1) % omoState.currentComponents.length);
     }
   }, []);
 

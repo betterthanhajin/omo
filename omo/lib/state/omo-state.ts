@@ -1,3 +1,8 @@
+import OmoGuestbook from "@/components/omo-guest-book";
+import OmoKitsch from "@/components/omo-kitsch";
+import OmoRetro from "@/components/omo-retro";
+import OmoRoadMap from "@/components/omo-roadmap";
+import StarBackground from "@/components/omo-star-background";
 import { proxy, useSnapshot } from "valtio";
 
 /**
@@ -8,6 +13,14 @@ export const omoState = proxy({
    * 랜덤테마 랜더링 할지 여부
    */
   showThemeRandering: true,
+
+  currentComponents: [
+    OmoRetro,
+    OmoGuestbook,
+    OmoKitsch,
+    OmoRoadMap,
+    StarBackground,
+  ],
 
   omoDummyData: [
     {

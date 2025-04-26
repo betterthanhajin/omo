@@ -1,33 +1,24 @@
 "use client";
 import { OmoHeader } from "@/components/omo-header";
-import OmoRetro from "@/components/omo-retro";
 import React, { useState, useEffect, useCallback, useMemo } from "react";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
-import OmoGuestbook from "@/components/omo-guest-book";
+import { omoState } from "@/lib/state/omo-state";
 
 export default function Page() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isRandomEnabled, setIsRandomEnabled] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const OmoKitsch = dynamic(() => import("@/components/omo-kitsch"));
-  const OmoRoadMap = dynamic(() => import("@/components/omo-roadmap"));
-  const StarBackground = dynamic(
-    () => import("@/components/omo-star-background")
-  );
-
-  const components = [OmoGuestbook, OmoKitsch, OmoRoadMap, StarBackground];
-  let newIndex = 0;
   const CurrentComponent = useMemo(
-    () => components[currentIndex],
+    () => omoState.currentComponents[currentIndex],
     [currentIndex]
   );
 
   const handleSwitchToggle = useCallback((isEnabled: boolean) => {
     setIsRandomEnabled(isEnabled);
     if (isEnabled) {
-      setCurrentIndex((prev) => (prev + 1) % components.length);
+      setCurrentIndex((prev) => (prev + 1) % omoState.currentComponents.length);
     }
   }, []);
 

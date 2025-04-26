@@ -3,18 +3,15 @@ import { OmoHeader } from "@/components/omo-header";
 import React, { useState, useCallback, useMemo } from "react";
 import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
+import { omoState } from "@/lib/state/omo-state";
 
 export default function Page() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isRandomEnabled, setIsRandomEnabled] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const OmoRoadMap = dynamic(() => import("@/components/omo-roadmap"));
-
-  const components = [OmoRoadMap];
-  let newIndex = 0;
   const CurrentComponent = useMemo(
-    () => components[currentIndex],
+    () => omoState.currentComponents[currentIndex],
     [currentIndex]
   );
 
@@ -33,7 +30,7 @@ export default function Page() {
   const handleSwitchToggle = useCallback((isEnabled: boolean) => {
     setIsRandomEnabled(isEnabled);
     if (isEnabled) {
-      setCurrentIndex((prev) => (prev + 1) % components.length);
+      setCurrentIndex((prev) => (prev + 1) % omoState.currentComponents.length);
     }
   }, []);
 

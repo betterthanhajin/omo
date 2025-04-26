@@ -4,32 +4,15 @@ import React, { useState, useCallback, useMemo } from "react";
 import dynamic from "next/dynamic";
 import { useMediaQuery } from "react-responsive";
 import { motion, AnimatePresence } from "framer-motion";
-import OmoGuestbook from "@/components/omo-guest-book";
+import { omoState } from "@/lib/state/omo-state";
 
 export default function Page() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isRandomEnabled, setIsRandomEnabled] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  const OmoRetro = dynamic(() => import("../../components/omo-retro"));
-  const OmoWaterColor = dynamic(
-    () => import("../../components/omo-water-color")
-  );
-  const OmoModern = dynamic(() => import("../../components/omo-modern"));
-  const OmoSectionSkills = dynamic(
-    () => import("../../components/omo-section-skills")
-  );
-
-  const OmoKitsch = dynamic(() => import("@/components/omo-kitsch"));
-  const OmoRoadMap = dynamic(() => import("@/components/omo-roadmap"));
-  const StarBackground = dynamic(
-    () => import("@/components/omo-star-background")
-  );
-
-  const components = [OmoKitsch];
-  let newIndex = 0;
   const CurrentComponent = useMemo(
-    () => components[currentIndex],
+    () => omoState.currentComponents[currentIndex],
     [currentIndex]
   );
 
@@ -48,7 +31,7 @@ export default function Page() {
   const handleSwitchToggle = useCallback((isEnabled: boolean) => {
     setIsRandomEnabled(isEnabled);
     if (isEnabled) {
-      setCurrentIndex((prev) => (prev + 1) % components.length);
+      setCurrentIndex((prev) => (prev + 1) % omoState.currentComponents.length);
     }
   }, []);
 
