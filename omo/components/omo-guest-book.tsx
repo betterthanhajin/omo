@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import BrickBackground from "./brick-background";
 
@@ -14,8 +15,16 @@ const BrickWall = () => {
     "#8d3e2f", // 벽돌색 6
   ];
 
+  const [brickColor, setbrickColor] = useState(brickColors[0]);
+
   // 모르타르(벽돌 사이 시멘트) 색상
   const mortarColor = "#e8e8e0";
+
+  useEffect(() => {
+    // 랜덤 색상 선택
+    const colorIndex = Math.floor(Math.random() * brickColors.length);
+    setbrickColor(brickColors[colorIndex]);
+  }, []);
 
   return (
     <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -51,10 +60,6 @@ const BrickWall = () => {
 
           // 각 행이 오프셋되도록 설정 (벽돌 패턴)
           const offsetX = row % 2 === 0 ? 0 : 30;
-
-          // 랜덤 색상 선택
-          const colorIndex = Math.floor(Math.random() * brickColors.length);
-          const brickColor = brickColors[colorIndex];
 
           // 벽돌에 텍스처 효과 추가
           const textureGradient = `
@@ -202,10 +207,10 @@ const PostItBoard = () => {
     { id: "postit-6", content: "여섯번째 메모", rotation: 0 },
     { id: "postit-7", content: "일곱번째 메모", rotation: -1 },
     { id: "postit-8", content: "여덟번째 메모", rotation: 1 },
-    { id: "postit-5", content: "아홉번째 메모", rotation: -3 },
-    { id: "postit-6", content: "열번째 메모", rotation: 0 },
-    { id: "postit-7", content: "열한번째 메모", rotation: -1 },
-    { id: "postit-8", content: "열두번째 메모", rotation: 1 },
+    { id: "postit-9", content: "아홉번째 메모", rotation: -3 },
+    { id: "postit-10", content: "열번째 메모", rotation: 0 },
+    { id: "postit-11", content: "열한번째 메모", rotation: -1 },
+    { id: "postit-12", content: "열두번째 메모", rotation: 1 },
   ]);
 
   const [newPostContent, setNewPostContent] = useState("");
