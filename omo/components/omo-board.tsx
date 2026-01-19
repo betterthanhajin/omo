@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { Book, BookHeart, Calendar, MessageCircle, Eye } from "lucide-react";
 import { omoState } from "@/lib/state/omo-state";
 
-interface OmoTitle {
+interface OmoBoard {
   index?: string;
   title: string;
   contents: string;
@@ -23,8 +23,8 @@ interface OmoBoardProps {
 }
 
 export function OmoBoard(overFlow: OmoBoardProps) {
-  const [originalData, setOriginalData] = useState<OmoTitle[]>([]);
-  const [titledata, setTitleData] = useState<OmoTitle[]>([]);
+  const [boardData, setBoardData] = useState<OmoBoard[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [viewMode, setViewMode] = useState<"card" | "list">("card"); // 기본값을 리스트 모드로 설정
   const boardRef = useRef<HTMLDivElement>(null);
@@ -32,7 +32,6 @@ export function OmoBoard(overFlow: OmoBoardProps) {
 
   // 초기 데이터 로드
   useEffect(() => {
-    // 샘플 데이터에 게시판 필드 추가 (실제 구현 시 이 부분 조정 필요)
     const enhancedData = omoState.omoDummyData.map((item, index) => ({
       ...item,
       date: new Date(Date.now() - index * 86400000).toLocaleDateString(),
@@ -40,10 +39,16 @@ export function OmoBoard(overFlow: OmoBoardProps) {
       views: Math.floor(Math.random() * 100) + 10,
       comments: Math.floor(Math.random() * 20),
     }));
-
-    setOriginalData(enhancedData);
-    setTitleData(enhancedData);
+    setBoardData(enhancedData);
   }, []);
+
+
+  const filteredData = searchTerm.trim() ? 
+    boardData.filter(
+      (item) =>
+        item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.contents.toLowerCase().includes(searchTerm.toLowerCase())
+    ) : boardData;
 
   // 오버플로우 처리
   useEffect(() => {
@@ -60,26 +65,13 @@ export function OmoBoard(overFlow: OmoBoardProps) {
   };
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const searchValue = e.target.value;
-
-    if (!searchValue.trim()) {
-      setTitleData(originalData);
-      return;
-    }
-
-    const filteredData = originalData.filter(
-      (item) =>
-        item.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-        item.contents.toLowerCase().includes(searchValue.toLowerCase())
-    );
-
-    setTitleData(filteredData);
+  setSearchTerm(e.target.value);
   };
 
   // 카드 뷰 렌더링
   const renderCardView = () => (
     <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 p-2">
-      {titledata.map((item, index) => (
+      {filteredData.map((item, index) => (
         <div
           key={index}
           className="bg-white rounded-lg shadow border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300"
@@ -151,7 +143,7 @@ export function OmoBoard(overFlow: OmoBoardProps) {
           </tr>
         </thead>
         <tbody>
-          {titledata.map((item, index) => (
+          {filteredData.map((item, index) => (
             <tr
               key={index}
               className="border-b border-gray-200 hover:bg-gray-50 cursor-pointer transition-colors duration-150"
